@@ -1,4 +1,4 @@
-function [ Vehicle ] = estimateVeicleparams( C )
+function [ Vehicle ] = estimateVehicleparams( C )
 % ESTIMATEVEHICLEPARMAS calculates vehicle parameters from the matrix C
 %
 %
