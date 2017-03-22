@@ -6,8 +6,8 @@ function [ tmp ] = unbiasedestimaton_1n( theta, angle )
 % Preallocate local variable
 tmp = double.empty;
 
-for i=1:length(theta)-1
-    tmp(i) = (theta(i+1) - theta(i)) * cos(angle(i)+(angle(i+1)-angle(i))/2);
+for n = 2:(length(theta))
+    tmp(n) = (theta(n) - theta(n - 1)) * cos(angle(n) + (angle(n) - angle(n - 1)) / 2);
 end
 
 end % function
