@@ -1,10 +1,14 @@
 function [ theta, omega ] = tick2theta2omega( tick, time )
-% TICK2OMEGA calculates the omega starting from the encoder tics according to equation
+% TICK2THETA2OMEGA calculates theta and omega starting from the encoder 
+% tics according to equation.
+
+% perform the differecnce between two ticks and mulitpy by encoder
+% resolution
 % theta(n) = (ptick(n+1) - tick(n)) * (2 * pi / res_encoder)
+% return value theta(n)
+  
+%Return  angluar velocity [rad/s]
 % omega(n) =  theta(n) / (time(i) - time(i-1))
-% res_encoder is a parameters inside the function
-% Input argument tick
-% Return the angular velocity
 
 % Preallocate local variable
 omega = double.empty;

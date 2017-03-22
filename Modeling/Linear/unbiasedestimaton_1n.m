@@ -1,5 +1,5 @@
- function [ tmp ] = unbiasedestimaton_1n( theta, angle )
-% Unbaised estimate of theta_i
+function [ tmp ] = unbiasedestimaton_1n( theta, angle )
+% Unbaised estimation of angular velocity w_i and oritantion angle_i
 % Pass function the value angular velocity and angle and return a value for
 % Phi matrix estimation
 

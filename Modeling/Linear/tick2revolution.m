@@ -1,10 +1,6 @@
 function [ revol ] = tick2revolution( tick )
-% TICK2OMEGA calculates the omega starting from the encoder tics according to equation
-% theta(n) = (ptick(n+1) - tick(n)) * (2 * pi / res_encoder)
-% omega(n) =  theta(n) / (time(i) - time(i-1))
-% res_encoder is a parameters inside the function
-% Input argument tick
-% Return the angular velocity
+% TICK2REVOLUTION calculates the revolution starting from the encoder tics
+% according to equation theta(n) = tick(n)) * (2 * pi / res_encoder)
 
 % Preallocate local variable
 revol = double.empty;

@@ -1,8 +1,8 @@
 function [ tmp ] = unbiasedestimaton_2n( theta, angle )
-% Unbaised estimate of theta_i
+% Unbaised estimation of angular velocity w_i and oritantion angle_i
 % Pass function the value angular velocity and angle and return a value for
 % Phi matrix estimation
-% 
+
 % Preallocate local variable
 tmp = double.empty;
 
