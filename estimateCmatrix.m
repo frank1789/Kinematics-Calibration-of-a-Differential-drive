@@ -10,6 +10,7 @@ star_pt = [1e-6, 1e-6; 1e-6, 1e-6];
 
 % Return C matrix
 C = [C1(1) C1(2); C2(1) C2(2)];
+fprintf('The estimated value of C matrix:\n');disp(C);
 
 % Free local variable
 clearvars C1 C2 resnomr1 resnmorm2
