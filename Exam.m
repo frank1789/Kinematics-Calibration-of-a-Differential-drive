@@ -49,6 +49,7 @@ for i = 1:4
     [ Phi_XY{i} ] = regressormatrix_displacement ( data{i} );
     % Calculate P trajectory
     [ P_xy{i} ] = vehicle_orientations_xy(data{i}.pose.x, data{i}.pose.y );
+    
     fprintf('### finish analisys: %s ###\n', filename{i})
 end
 
@@ -59,14 +60,24 @@ collPhi_XY    = [Phi_XY{1}; Phi_XY{2}; Phi_XY{3}; Phi_XY{4}];
 collP_xy      = [P_xy{1}; P_xy{2}; P_xy{3};P_xy{4}];
 
 % Estimte C matrix
-[ C ] = estimateCmatrix( collPhi_theta, collP_angle, collPhi_XY, collP_xy )
+[ C ] = estimateCmatrix( collPhi_theta, collP_angle, collPhi_XY, collP_xy );
 
 % Estimate Vehicleparameters
-[ Vehicle ] = estimateVehicleparams( C )
-
-for j = 1:4
-    [ newpose{j} ] = estimation2newpose( data{j}, Vehicle );
-end
+[ Vehicle ] = estimateVehicleparams( C );
+%% WORK FINE CORRECT THE EXACT ESTIMATION
+Vehicle.wheelLeft = mean([Vehicle.wheelLeft;Vehicle.wheelRight]);
+dev = std([Vehicle.wheelLeft;Vehicle.wheelRight]);
+disp('std value')
+disp(dev)
+Vehicle.wheelRight = Vehicle.wheelLeft;
+stpt= Vehicle.wheelRight-dev
+endpt= Vehicle.wheelRight+dev 
+for n = stpt:0.1:endpt
+    Vehicle.wheelRight= n
+    Vehicle.wheelLeft = n
+    for j = 1:4
+        [ newpose{j} ] = estimation2newpose( data{j}, Vehicle );
+    end
 
 % % Printing graphics
 % for i = 1:4
@@ -74,11 +85,13 @@ end
 %     graph_tick(data{i}, i);
 %     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
 % end
-
-figure
-hold on
-plot(data{4}.pose.x, data{4}.pose.y);
-plot(newpose{4}.x, newpose{4}.y);
-hold off;
+    parfor w = 1:4
+        figure();
+        hold on
+        plot(data{w}.pose.x,data{w}.pose.y)
+        plot(newpose{w}.x*100, newpose{w}.y*100);
+        hold off
+    end
+end
 
 diary off
