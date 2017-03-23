@@ -22,5 +22,6 @@ for i = 2:length(angle)
         angle(i) = angle(i-1) + (angle(i) - angle(i-1));
     end
 end
+
 angle = unwrap(wrapTo2Pi(angle));
 end
