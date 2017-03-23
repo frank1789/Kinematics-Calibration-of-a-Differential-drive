@@ -7,7 +7,7 @@ function [ theta, omega ] = tick2theta2omega( tick, time )
 % theta(n) = (ptick(n+1) - tick(n)) * (2 * pi / res_encoder)
 % return value theta(n)
   
-%Return  angluar velocity [rad/s]
+% Return  angluar velocity [rad/s]
 % omega(n) =  theta(n) / (time(i) - time(i-1))
 
 % Preallocate local variable
