@@ -1,4 +1,5 @@
 % KINEMATICS CALIBRATION OF A DIFFERENTIAL DRIVE WHEELCHAIR
+
 % Reset workspace and initialize script
 close all;
 clear;
@@ -33,10 +34,7 @@ for i = 1:4
     filename{i} = ['new_Camera_Odo_Data_0' num2str(i) '.txt'];
     % Divide input file in local variable
     [ data{i} ] = file2data( filename{i}, delimiterIn );
-end
-
-for i = 1:4
-    fprintf('### START ANALYSIS FILE %s ###\n', filename{i});
+    fprintf('### Start analysis file: %s ###\n', filename{i});
     
     % Calculate the angular velocity
     [ theta{i}.Left, omega{i}.Left ]   = tick2theta2omega( data{i}.tick.Left, data{i}.time );
@@ -51,8 +49,8 @@ for i = 1:4
     [ Phi_XY{i} ] = regressormatrix_displacement ( data{i} );
     % Calculate P trajectory
     [ P_xy{i} ] = vehicle_orientations_xy(data{i}.pose.x, data{i}.pose.y );
+    fprintf('### finish analisys: %s ###\n', filename{i})
 end
-fprintf('### finish analisys ###\n')
 
 % Collect data from all dataset
 collPhi_theta = [Phi_theta{1}; Phi_theta{2}; Phi_theta{3}; Phi_theta{4}];
@@ -66,11 +64,21 @@ collP_xy      = [P_xy{1}; P_xy{2}; P_xy{3};P_xy{4}];
 % Estimate Vehicleparameters
 [ Vehicle ] = estimateVehicleparams( C )
 
-% Printing graphics
-for i = 1:4
-    graph_angle(data{i}.pose.psi, i);
-    graph_tick(data{i}, i);
-    graph_pose(data{i}.pose.x, data{i}.pose.y, i);
+for j = 1:4
+    [ newpose{j} ] = estimation2newpose( data{j}, Vehicle );
 end
+
+% % Printing graphics
+% for i = 1:4
+%     graph_angle(data{i}.pose.psi, i);
+%     graph_tick(data{i}, i);
+%     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
+% end
+
+figure
+hold on
+plot(data{4}.pose.x, data{4}.pose.y);
+plot(newpose{4}.x, newpose{4}.y);
+hold off;
 
 diary off
