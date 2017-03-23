@@ -74,7 +74,7 @@ newpose.psi(1) = angle(1);
 for i=1:length(angle)
     newpose.x(i+1)   = newpose.x(i)   +   pi * tick4params(i) * (cos(newpose.psi(i))/res_encoder);
     newpose.y(i+1)   = newpose.y(i)   +   pi * tick4params(i) * (sin(newpose.psi(i))/res_encoder);
-    newpose.psi(i+1) = newpose.psi(i) + 2*pi * diff2tick4params(i) / (res_encoder*track);
+    newpose.psi(i+1) = newpose.psi(i) + 2*pi * diff2tick4params(i) / (res_encoder * track);
 end
 
 % free memory
