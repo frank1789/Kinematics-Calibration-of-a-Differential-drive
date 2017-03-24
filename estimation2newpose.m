@@ -45,6 +45,7 @@ res_encoder = 16384 * 25;
 
 % Insatziate local variable
 [ diffleft, diffright ] = tick2differenceTick( data );
+[ vehicleparams ] = meanradius( vehicleparams );
 [ coordinateX, coordinateY, vehicleparamsM ] = centimeter2meter ( data, vehicleparams );
 radwheelL = vehicleparamsM.wheelLeft;
 radwheelR = vehicleparamsM.wheelRight;
