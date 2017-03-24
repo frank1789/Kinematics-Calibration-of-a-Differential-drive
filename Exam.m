@@ -64,34 +64,16 @@ collP_xy      = [P_xy{1}; P_xy{2}; P_xy{3};P_xy{4}];
 
 % Estimate Vehicleparameters
 [ Vehicle ] = estimateVehicleparams( C );
-%% WORK FINE CORRECT THE EXACT ESTIMATION
-Vehicle.wheelLeft = mean([Vehicle.wheelLeft;Vehicle.wheelRight]);
-dev = std([Vehicle.wheelLeft;Vehicle.wheelRight]);
-disp('std value')
-disp(dev)
-Vehicle.wheelRight = Vehicle.wheelLeft;
-stpt= Vehicle.wheelRight-dev
-endpt= Vehicle.wheelRight+dev 
-for n = stpt:0.1:endpt
-    Vehicle.wheelRight= n
-    Vehicle.wheelLeft = n
-    for j = 1:4
-        [ newpose{j} ] = estimation2newpose( data{j}, Vehicle );
-    end
 
-% % Printing graphics
-% for i = 1:4
-%     graph_angle(data{i}.pose.psi, i);
-%     graph_tick(data{i}, i);
-%     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
-% end
-    parfor w = 1:4
-        figure();
-        hold on
-        plot(data{w}.pose.x,data{w}.pose.y)
-        plot(newpose{w}.x*100, newpose{w}.y*100);
-        hold off
-    end
+ for j = 1:4
+        [ newpose{j} ] = estimation2newpose( data{j}, Vehicle );
+ end
+
+% Printing graphics
+for i = 1:4
+    graph_angle(data{i}.pose.psi, i);
+    graph_tick(data{i}, i);
+    graph_pose(data{i}.pose.x, data{i}.pose.y, i);
 end
 
 diary off
