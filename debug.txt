@@ -1,0 +1,32 @@
+### Start analysis file: new_Camera_Odo_Data_01.txt ###
+### finish analisys: new_Camera_Odo_Data_01.txt ###
+### Start analysis file: new_Camera_Odo_Data_02.txt ###
+### finish analisys: new_Camera_Odo_Data_02.txt ###
+### Start analysis file: new_Camera_Odo_Data_03.txt ###
+### finish analisys: new_Camera_Odo_Data_03.txt ###
+### Start analysis file: new_Camera_Odo_Data_04.txt ###
+### finish analisys: new_Camera_Odo_Data_04.txt ###
+
+<a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'local_min_possible_lsq','CSHelpWindow');">Local minimum possible</a>.
+
+lsqnonlin stopped because the final change in the sum of squares relative to 
+its initial value is less than the default value of the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'function_tolerance_lsq','CSHelpWindow');">function tolerance</a>.
+
+<<a href = "matlab: createExitMsg('snls',3.000000e+00,true,true,'lsqnonlin',2.471405e-07,'default',1.000000e-06,0.000000e+00,'',0.000000e+00,0.000000e+00,'',0.000000e+00);">stopping criteria details</a>>
+
+
+<a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'local_min_possible_lsq','CSHelpWindow');">Local minimum possible</a>.
+
+lsqnonlin stopped because the final change in the sum of squares relative to 
+its initial value is less than the default value of the <a href = "matlab: helpview([docroot '/toolbox/optim/msg_csh/optim_msg_csh.map'],'function_tolerance_lsq','CSHelpWindow');">function tolerance</a>.
+
+<<a href = "matlab: createExitMsg('snls',3.000000e+00,true,true,'lsqnonlin',2.846837e-09,'default',1.000000e-06,0.000000e+00,'',0.000000e+00,0.000000e+00,'',0.000000e+00);">stopping criteria details</a>>
+
+The estimated value of C matrix:
+    8.1873    6.5229
+    0.2823   -0.2807
+
+The estimated values of the vehicle are:
+	Radius of left wheel: 16.374675
+	Radius of right wheel: 13.045796
+	The track is equal: 52.243177
