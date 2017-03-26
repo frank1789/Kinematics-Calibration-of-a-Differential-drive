@@ -1,0 +1,151 @@
+\section{Methods}
+\subsection{Kinematic Model}
+For the analysis of differential wheelchair drive parameters using a simplified model in the reference system prorprio odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ maneuver.
+The robot is subject to pure rolling, then we neglect iteration slippage between the wheel and the ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angular velocity of the wheels according to the equation functional (\ref{eq:velocityrelation}).
+The other two support wheels are considered passive. This schematization is observable in the fig. \ref{fig:model}.
+\begin{equation}
+\label{eq:velocityrelation}
+	\left[ \begin{array}{cc}
+				v	\\									
+				\omega 							
+			 \end{array} 
+	\right]  =\, C\,
+	\left[ \begin{array}{cc}
+ 				\omega_\textsc{l} \\ 
+				\omega_\textsc{r}
+			 \end{array} 
+	\right]
+\end{equation}
+
+\begin{figure}[!h]
+\centering
+    \resizebox{.8\linewidth}{!}{\input{robotmodel.tex}}
+\caption{Robot kinemati model}
+\label{fig:model}
+\end{figure}
+\noindent Where the matrix $\textbf{C} \in \RealNumber^{2 x 2}$ is defined as (\ref{eq:Cmatrix}):
+\begin{equation}
+\label{eq:Cmatrix}
+	\left[ \begin{array}{cc}
+ 				\frac{r_\textsc{r}}{2} &	\frac{r_\textsc{l}}{2} \\
+				\frac{r_\textsc{l}}{b} &	-\frac{r_\textsc{l}}{b} 
+			 \end{array} 
+	\right]
+\end{equation}
+in which $r_\textsc{r}$ and $r_\textsc{l}$ are the radii of the right and left wheel, respectively.
+The odometry of a vehicle is usually implemented by discrete-time integration, such as (\ref{eq:odometry}):
+\begin{equation}
+\label{eq:odometry}
+	\begin{cases}
+		x_{k+1} = x_{k} + T \, v_{k} \, cos(\theta_{k} + T \,\omega_{k}/2)\\
+		y_{k+1} = y_{k} + T \, v_{k} \, sin(\theta_{k} + T \, \omega_{k}/2)\\
+		\theta_{k+1} = \theta_{k} + T \, \omega_{k}
+	\end{cases}
+\end{equation}           
+Notice that low sampling frequency and high vehicle velocities can be a significant source of odometric error.
+\input{dataanalysis}
+\subsection{Calibration Techinque}
+To estimate the parameters of the robot expressed in the equation \ref{eq:Cmatrix}, namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
+Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The fiures \ref{fig:data} shows the data sets supplied information related to: the camera position $x, y, \psi$ and increments of the encoder.
+It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations \ref{eq:Phi4} and \ref{eq:XY4} are rewritten limited to the four paths to obtain:
+\begin{equation}
+\label{eq:Phi4}
+	\begin{bmatrix}
+		\hat{c}_{2,1}\\
+		\hat{c}_{2,2}
+	\end{bmatrix} =	(\bar{\Phi}_{\theta}^{\textsc{t}} \, \bar{\Phi}_{\theta})^{-1} \, \bar{\Phi}_{\theta}^{\textsc{t}} \, 
+	\begin{bmatrix}
+		\theta_{\textsc{n},1} - \theta_{\textsc{n},0}\\
+		\theta_{\textsc{n},2} - \theta_{\textsc{n},0}\\
+		\theta_{\textsc{n},3} - \theta_{\textsc{n},0}\\
+		\theta_{\textsc{n},4} - \theta_{\textsc{n},0}
+	\end{bmatrix}
+\end{equation}
+\begin{equation}
+\label{eq:XY4}
+	\begin{bmatrix}
+		\hat{c}_{1,1}\\
+		\hat{c}_{1,2}
+	\end{bmatrix} = (\bar{\Phi}_{xy}^{\textsc{t}} \, \bar{\Phi}_{xy})^{-1} \, \bar{\Phi}_{xy}^{\textsc{t}} \, 
+	\begin{bmatrix}
+		xy_{\textsc{n},1} - xy_{\textsc{n},0}\\
+		xy_{\textsc{n},2} - xy_{\textsc{n},0}\\
+		xy_{\textsc{n},3} - xy_{\textsc{n},0}\\
+		xy_{\textsc{n},4} - xy_{\textsc{n},0}
+	\end{bmatrix}
+\end{equation}
+ As a result of simulations shows the values of the matrix C:
+\begin{equation}
+\label{eq:Cresult}
+	\begin{bmatrix}
+		8.1873  &  6.5229\\
+    	0.2823 &  -0.2807
+	\end{bmatrix}
+\end{equation}
+It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values $c_ {2,1}$ and $c_ {2,2}$ , without the negative sign, are much more similar because precedenemente estimated at $c_{1,j}$ and therefore do not contain the error propagation.
+Subsequently, it calculates the average between the values of the obtained rays and the standard deviation, these are shown in the table \ref{tab:recapvalue}.
+\begin{table}[!h]
+\centering
+	\begin{tabular}{lccc}
+		\hline
+								& Radius 	& Mean 	& standard  \\
+								&	[mm]	& [mm]	& deviation [mm]\\
+		\hline
+		$r_\textsc{r}$	&	$130.457$		& $147.102	$		&	$\pm23.538$\\
+		$r_\textsc{l}$	&	$163.746$		& $147.102	$		&	$\pm23.538$\\
+		$b$					&	$522.43$\\
+		\hline
+\end{tabular}
+\caption{estimated value}
+\label{tab:recapvalue}
+\end{table}
+
+%
+%\begin{figure*}[htb]
+%\subfloat[][\emph{dataset 1}.]
+%   {\includegraphics[width=.30\textwidth]{angle_dataset_1.eps}} \,
+%\subfloat[][\emph{dataset 2}.]
+%   {\includegraphics[width=.30\textwidth]{angle_dataset_2.eps}} \,
+%\subfloat[][\emph{dataset 3}.]
+%   {\includegraphics[width=.30\textwidth]{angle_dataset_3.eps}} \,
+%\subfloat[][\emph{dataset 4}.]
+%   {\includegraphics[width=.35\textwidth]{angle_dataset_4.eps}}\\
+%%\caption{Angle captured by the camera}
+%\end{figure*}
+%
+%\begin{figure*}[htb]
+%\subfloat[][\emph{dataset 1}.]
+%   {\includegraphics[width=.35\textwidth]{trajectory_dataset_1.eps}} \,
+%\subfloat[][\emph{dataset 2}.]
+%   {\includegraphics[width=.35\textwidth]{trajectory_dataset_2.eps}} \,
+%\subfloat[][\emph{dataset 3}.]
+%   {\includegraphics[width=.35\textwidth]{trajectory_dataset_3.eps}} \,
+%\subfloat[][\emph{dataset 4}.]
+%   {\includegraphics[width=.35\textwidth]{trajectory_dataset_4.eps}} \\
+%\end{figure*}
+%\begin{figure*}[htb]
+%\subfloat[][\emph{dataset 1}.]
+%   {\includegraphics[width=.35\textwidth]{tick_dataset_1.eps}} \,
+%\subfloat[][\emph{dataset 2}.]
+%   {\includegraphics[width=.35\textwidth]{tick_dataset_2.eps}} \,
+%\subfloat[][\emph{dataset 3}.]
+%   {\includegraphics[width=.35\textwidth]{tick_dataset_3.eps}} \,
+%\subfloat[][\emph{dataset 4}.]
+%   {\includegraphics[width=.35\textwidth]{tick_dataset_4.eps}}
+%\caption{Dataset}
+%\label{fig:data}
+%\end{figure*}
+\noindent
+Finally, we show in the figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
+\begin{figure*}[htb]
+\subfloat[][\emph{dataset 1}.]
+   {\includegraphics[width=0.5\textwidth]{odocam_1.eps}} \,
+\subfloat[][\emph{dataset 2}.]
+   {\includegraphics[width=0.5\textwidth]{odocam_2.eps}} \\
+\subfloat[][\emph{dataset 3}.]
+   {\includegraphics[width=0.5\textwidth]{odocam_3.eps}} \,
+\subfloat[][\emph{dataset 4}.]
+   {\includegraphics[width=0.5\textwidth]{odocam_4.eps}}
+\caption{Odometry reconstruction}
+\label{fig:OdoRec}
+\end{figure*}

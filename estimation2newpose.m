@@ -30,6 +30,7 @@ res_encoder = 16384 * 25;
 
 % Insatziate local variable from function
 [ diffleft, diffright ] = tick2differenceTick( data );
+[ vehicleparams ] = meanradius( vehicleparams );
 [ coordinateX, coordinateY, vehicleparamsM ] = centimeter2meter ( data, vehicleparams );
 
 % Insatziate local variable
