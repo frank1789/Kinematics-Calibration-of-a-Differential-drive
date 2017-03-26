@@ -1,2 +1,20 @@
 
 \.DS_Store
+
+Report/Report\.aux
+
+*.eps
+
+Report/Report\.bbl
+
+Report/Report\.blg
+
+Report/Report\.dvi
+
+Report/Report\.log
+
+Report/Report\.out
+
+Report/Report\.synctex\.gz
+
+debug\.txt

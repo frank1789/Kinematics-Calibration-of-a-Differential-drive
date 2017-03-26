@@ -1,0 +1,111 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[12pt,a4paper,english,twoside,twocolumn]{article}
+\pagenumbering{arabic}
+\usepackage{setspace}
+%\onehalfspace
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage[section]{placeins}
+%----------------------------------------------------------------------------------------
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ae}
+\usepackage{relsize}
+\usepackage{csquotes} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{
+	bookmarksnumbered=true,
+	linkcolor=black,
+	citecolor=black,
+	%pagecolor=black,
+	urlcolor=black,
+}
+\usepackage{verbatim}
+\usepackage{alltt}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\RealNumber}{\rm I\!R}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
+%----------------------------------------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{./imgs/}}
+\renewcommand{\figurename}{Fig.}
+\usepackage{subfig}
+%----------------------------------------------------------------------------------------
+\usepackage{algorithmicx}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+%----------------------------------------------------------------------------------------
+\usepackage{tabularx}
+%----------------------------------------------------------------------------------------
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\usepackage{titling} % Customizing the title section
+%----------------------------------------------------------------------------------------
+\usepackage{tikz,fp,ifthen,fullpage}
+\usepackage{pgfmath, pgfplots, xparse}
+\usetikzlibrary{backgrounds, arrows}
+\usetikzlibrary{decorations.pathmorphing,fit,through}
+\usetikzlibrary{shapes,decorations,shadows}
+\usetikzlibrary{fadings,patterns,mindmap}
+\usepackage{tikz-dimline, calc}
+\pgfplotsset{compat=newest}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Homework - Kinematics Calibration of a Differential drive wheelchair} % Article title
+\author{%
+\textsc{Francesco Argentieri}\thanks{ID: 183892}\\[1ex] % Your name
+\normalsize University of Trento \\ % Your institution
+\normalsize \href{mailto:francesco.argentieri@studenti.unitn.it}{francesco.argentieri@studenti.unitn.it} % Your email address
+}
+%\and % Uncomment if 2 authors are required, duplicate these 4 lines if more
+%\textsc{Jane Smith}\thanks{Corresponding author} \\[1ex] % Second author's name
+%\normalsize University of Utah \\ % Second author's institution
+%\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
+\date{} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent  For a mobile robot, odometry calibration consists of the identification of a set of kinematic parameters that allow reconstructing the vehicle’s absolute position and orientation starting from the wheels’ encoder measurements.
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+	% Print the title
+	\maketitle
+	%----------------------------------------------------------------------------------------
+	%	ARTICLE CONTENTS
+	%----------------------------------------------------------------------------------------
+	\input{Introduction}
+	%\input{dataanalysis}
+	\input{Methods}
+	\input{Result}
+
+%----------------------------------------------------------------------------------------
+%	Bibliography
+%----------------------------------------------------------------------------------------
+	\bibliographystyle{IEEEtran}
+	\bibliography{bibliografy.bib}
+\end{document}
