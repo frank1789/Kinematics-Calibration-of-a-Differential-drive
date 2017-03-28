@@ -14,7 +14,7 @@ hold on
 grid on
 plot(odometricX, odometricY);
 plot(cameraX*100, cameraY*100, 'r');
-legend(camstr, odostr);
+legend(odostr, camstr);
 hold off
 str = sprintf('Trajectory dataset %d', i);
 title(str)
