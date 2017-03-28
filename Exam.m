@@ -78,6 +78,6 @@ end
 
 % 
 for i = 1:4
-[ CC ]=performcovariance( data{i}, Vehicle, newpose{i} );
+[ CC ]=performcovariance( data{i}, meanradius(estimateVehicleparams( C )), newpose{i} );
  end
 diary off
