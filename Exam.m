@@ -66,18 +66,18 @@ collP_xy      = [P_xy{1}; P_xy{2}; P_xy{3};P_xy{4}];
 [ Vehicle ] = estimateVehicleparams( C );
 
 for i = 1:4
-   % Calculate camera position
+    % Calculate camera position
     [ newpose{i} ] = estimation2newpose( data{i}, Vehicle );
-%     
-%     Printing graphics
-%     graph_angle(data{i}.pose.psi, i);
-%     graph_tick(data{i}, i);
-%     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
-%     graphOdometricCamera( data{i}, newpose{i}, i );
+    
+    % Printing graphics
+    graph_angle(data{i}.pose.psi, i);
+    graph_tick(data{i}, i);
+    graph_pose(data{i}.pose.x, data{i}.pose.y, i);
+    graphOdometricCamera( data{i}, newpose{i}, i );
 end
 
 % 
-for i = 1:4
-[ CC ]=performcovariance( data{i}, meanradius(estimateVehicleparams( C )), newpose{i} );
- end
+% for i = 1:4
+% [ CC ]=performcovariance( data{i}, meanradius(estimateVehicleparams( C )), newpose{i} );
+%  end
 diary off
