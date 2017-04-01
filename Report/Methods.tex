@@ -45,15 +45,9 @@ The odometry of a vehicle is usually implemented by discrete-time integration, s
 Notice that low sampling frequency and high vehicle velocities can be a significant source of odometric error.
 \input{dataanalysis}
 \subsection{Calibration Techinque}
-To estimate the parameters of the robot expressed in the equation (\ref{eq:Cmatrix}), namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
-Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The datasets supplied information related to: the camera position $x, y, \theta$ and increments of the encoder. Each information is saved in columns: 
-\begin{itemize}
-\item column 1: acquisistions time [ms];
-\item columns 2--3--4: camera pose $x, y, \theta$ [cm, cm, rad];
-\item column from 5 to 13: camera covariance ordered by rows [cm$^2$] for pose, [rad$^2$] for angle and [cm*rad] for mixed terms ;
-\item colunm 14--15: odometric Encoder ticks Left and Right;
-\end{itemize}
-It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations (\ref{eq:Phi4}) and (\ref{eq:XY4}) are rewritten limited to the four paths to obtain:
+To estimate the parameters of the robot expressed in the equation \ref{eq:Cmatrix}, namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
+Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The fiures \ref{fig:data} shows the data sets supplied information related to: the camera position $x, y, \psi$ and increments of the encoder.
+It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations \ref{eq:Phi4} and \ref{eq:XY4} are rewritten limited to the four paths to obtain:
 \begin{equation}
 \label{eq:Phi4}
 	\begin{bmatrix}
@@ -105,6 +99,7 @@ Subsequently, it calculates the average between the values of the obtained rays 
 \caption{estimated value}
 \label{tab:recapvalue}
 \end{table}
+
 %
 %\begin{figure*}[htb]
 %\subfloat[][\emph{dataset 1}.]
@@ -140,8 +135,9 @@ Subsequently, it calculates the average between the values of the obtained rays 
 %\caption{Dataset}
 %\label{fig:data}
 %\end{figure*}
+\noindent
 Finally, we show in the figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
-\begin{figure*}[!ht]
+\begin{figure*}[htb]
 \subfloat[][\emph{dataset 1}.]
    {\includegraphics[width=0.5\textwidth]{odocam_1.eps}} \,
 \subfloat[][\emph{dataset 2}.]
