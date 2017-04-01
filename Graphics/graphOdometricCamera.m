@@ -12,16 +12,19 @@ camstr = sprintf('Camera Pose');
 figure();
 hold on
 grid on
+axis equal
 plot(odometricX, odometricY);
-plot(cameraX*100, cameraY*100, 'r');
-legend(odostr, camstr);
+plot(cameraX, cameraY, 'r');
+legend(camstr, odostr);
+xlabel('[cm]')
+ylabel('[cm]')
 hold off
 str = sprintf('Trajectory dataset %d', i);
 title(str)
 
 % Export figure
-fname = sprintf('odocam_%d', i);
-checkfile{i} = ['odocam_' num2str(i) '.eps'];
+fname = sprintf('odometric_%d', i);
+checkfile{i} = ['odometric_' num2str(i) '.eps'];
 if exist(checkfile{i}, 'file') == 2
     fprintf('File: %s,already exist\n', fname)
 else

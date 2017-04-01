@@ -1,7 +1,7 @@
 \section{Methods}
 \subsection{Kinematic Model}
-For the analysis of differential wheelchair drive parameters using a simplified model in the reference system prorprio odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ maneuver.
-The robot is subject to pure rolling, then we neglect iteration slippage between the wheel and the ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angular velocity of the wheels according to the equation functional (\ref{eq:velocityrelation}).
+For the analysis of differential wheelchair drive parameters using a simplified model in the reference system prorprio odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment.
+The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angular velocity of the wheels according to the equation functional (\ref{eq:velocityrelation}).
 The other two support wheels are considered passive. This schematization is observable in the fig. \ref{fig:model}.
 \begin{equation}
 \label{eq:velocityrelation}
@@ -45,9 +45,15 @@ The odometry of a vehicle is usually implemented by discrete-time integration, s
 Notice that low sampling frequency and high vehicle velocities can be a significant source of odometric error.
 \input{dataanalysis}
 \subsection{Calibration Techinque}
-To estimate the parameters of the robot expressed in the equation \ref{eq:Cmatrix}, namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
-Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The fiures \ref{fig:data} shows the data sets supplied information related to: the camera position $x, y, \psi$ and increments of the encoder.
-It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations \ref{eq:Phi4} and \ref{eq:XY4} are rewritten limited to the four paths to obtain:
+To estimate the parameters of the robot expressed in the equation (\ref{eq:Cmatrix}), namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
+Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The datasets supplied information related to: the camera position $x, y, \theta$ and increments of the encoder. Each information is saved in columns: 
+\begin{itemize}
+\item column 1: acquisistions time [ms];
+\item columns 2--3--4: camera pose $x, y, \theta$ [cm, cm, rad];
+\item column from 5 to 13: camera covariance ordered by rows [cm$^2$] for pose, [rad$^2$] for angle and [cm*rad] for mixed terms ;
+\item colunm 14--15: odometric Encoder ticks Left and Right;
+\end{itemize}
+It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations (\ref{eq:Phi4}) and (\ref{eq:XY4}) are rewritten limited to the four paths to obtain:
 \begin{equation}
 \label{eq:Phi4}
 	\begin{bmatrix}
@@ -82,8 +88,8 @@ It has been chosen to perform the odometry calibration whereas in the same calcu
     	0.2823 &  -0.2807
 	\end{bmatrix}
 \end{equation}
-It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values $c_ {2,1}$ and $c_ {2,2}$ , without the negative sign, are much more similar because precedenemente estimated at $c_{1,j}$ and therefore do not contain the error propagation.
-Subsequently, it calculates the average between the values of the obtained rays and the standard deviation, these are shown in the table \ref{tab:recapvalue}.
+It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because precedenemente estimated at $c_{1,j}$ and therefore do not contain the error propagation.
+Subsequently, it calculates the average between the values of the obtained rays and the standard deviation, these are shown in the table (\ref{tab:recapvalue}).
 \begin{table}[!h]
 \centering
 	\begin{tabular}{lccc}
@@ -99,7 +105,6 @@ Subsequently, it calculates the average between the values of the obtained rays 
 \caption{estimated value}
 \label{tab:recapvalue}
 \end{table}
-
 %
 %\begin{figure*}[htb]
 %\subfloat[][\emph{dataset 1}.]
@@ -135,9 +140,8 @@ Subsequently, it calculates the average between the values of the obtained rays 
 %\caption{Dataset}
 %\label{fig:data}
 %\end{figure*}
-\noindent
 Finally, we show in the figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
-\begin{figure*}[htb]
+\begin{figure*}[!ht]
 \subfloat[][\emph{dataset 1}.]
    {\includegraphics[width=0.5\textwidth]{odocam_1.eps}} \,
 \subfloat[][\emph{dataset 2}.]
