@@ -11,7 +11,7 @@
  \draw [rounded corners=15,pattern=crosshatch, pattern color=gray] (0.5, 2.5)  rectangle (1.5, 5.5);
  \draw [rounded corners=15,pattern=crosshatch, pattern color=gray] (6.5, 2.5) rectangle (7.5, 5.5);
  \draw (1.5, 4) -- (6.5, 4);
- \draw (4, 4) -- (4, 6);
+% \draw (4, 4) -- (4, 6);
  % quote wheel
  \dimline  [color=gray, 
                  %line style={thick},
@@ -37,20 +37,20 @@
  	\coordinate [label = below: \scriptsize $RF0$] (A) at (0,0);
  	\coordinate	(Bx) at	($(A)+1*(0:1)$);
  	\coordinate	(By)	at	($(A)+1*(90:1)$);
- 	\draw [->] 	(A) -- (By) node[left]{$y$};
- 	\draw [->] 	(A) -- (Bx) node[above]{$x$};
+ 	\draw [->] 	(A) -- (By) node[left]{\tiny $y$};
+ 	\draw [->] 	(A) -- (Bx) node[above]{\tiny $x$};
  % RF1
-  	\coordinate [label = below: \scriptsize $RF1$] (RF1) at (4,4);
+  	\coordinate [label = above right: \scriptsize $RF1$] (RF1) at (4,4);
  	\coordinate	(RF1x) at	($(RF1)+1*(0:1)$);
  	\coordinate	(RF1y)	at	($(RF1)+1*(90:1)$);
  	\fill(RF1) circle (1.4pt);
- 	\draw [->] (RF1) -- (RF1y) node[left] {$y'$};
- 	\draw [->] (RF1) -- (RF1x) node[above] {$x'$};
+ 	\draw [->] (RF1) -- (RF1y) node[left] {\tiny $y'$};
+ 	\draw [->] (RF1) -- (RF1x) node[above] {\tiny $x'$};
  % RFcam
- 	\coordinate [label = below: \scriptsize $RF_{cam}$] (R) at (4.3,2.8);
+ 	\coordinate [label = below: \scriptsize $RF_{cam}$] (R) at (4.8,2.8);
  	\coordinate (Rx) at ($(R)+1*(22.5:1)$);
  	\coordinate (Ry) at ($(R)+1*(90+22.5:1)$);
  	\fill (R) circle (1.4pt);
-	 \draw [->, green] (R) -- (Ry) node[left] {$y_{cam}$};
- 	 \draw [->, green] (R) -- (Rx) node[above]{$x_{cam}$};
+	 \draw [->, darkgray] (R) -- (Ry) node[left] {\tiny $y_{cam}$};
+ 	 \draw [->, darkgray] (R) -- (Rx) node[above]{\tiny $x_{cam}$};
  \end{tikzpicture}
