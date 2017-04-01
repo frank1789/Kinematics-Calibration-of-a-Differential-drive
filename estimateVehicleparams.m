@@ -23,9 +23,9 @@ Vehicle.track      = (wheelLeft4track + wheelRight4track) / 2;
 
 % Print output
 fprintf('The estimated values of the vehicle are:\n')
-fprintf('\tRadius of left wheel: %f\n', Vehicle.wheelLeft)
-fprintf('\tRadius of right wheel: %f\n', Vehicle.wheelRight )
-fprintf('\tThe track is equal: %f\n', Vehicle.track)
+fprintf('\tRadius of left wheel:\t%f\n', Vehicle.wheelLeft)
+fprintf('\tRadius of right wheel:\t%f\n', Vehicle.wheelRight )
+fprintf('\tThe track is equal:\t%f\n', Vehicle.track)
 
 % Free local variable
 clearvars wheelLeft4track wheelRight4track

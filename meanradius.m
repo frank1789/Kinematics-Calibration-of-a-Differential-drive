@@ -7,8 +7,8 @@ function [ Vehicle ] = meanradius( Vehicle )
 radiusmean = mean([Vehicle.wheelLeft;Vehicle.wheelRight]);
 radiusstd  = std([Vehicle.wheelLeft;Vehicle.wheelRight]);
 
-fprintf('%f\n', radiusmean);
-fprintf('%f\n', radiusstd);
+fprintf('the mean between wheels radii:\t%f\n', radiusmean);
+fprintf('the std between wheels radii:\t%f\n', radiusstd);
 
 % new mean value of radius
 Vehicle.wheelRight = radiusmean;

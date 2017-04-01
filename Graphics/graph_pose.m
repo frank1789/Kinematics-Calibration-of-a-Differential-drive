@@ -6,7 +6,7 @@ plot(x, y);
 grid on;
 str = sprintf('Trajectory dataset');
 title(str)
-str = sprintf('Odometric Pose');
+str = sprintf('Camera Pose');
 legend(str);
 
 % Export figure
