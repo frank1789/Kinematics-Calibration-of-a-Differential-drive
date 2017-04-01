@@ -103,9 +103,8 @@ end
 % Initiliaze variable
 pose = double.empty;
 for i = 1:4
-    pose{i} = test(data{i},idx{i},parameters,i);
+    pose{i} = odometricRecostruction(data{i},idx{i},parameters,i);
     %graphOdometricCamera( data{i}, pose{i}, i );
 end
-
 
 diary off
