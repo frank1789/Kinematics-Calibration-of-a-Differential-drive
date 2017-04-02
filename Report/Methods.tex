@@ -120,8 +120,8 @@ Finally, we show in the figures \ref{fig:OdoRec}, it shows the calcu- lation for
 \subsection{Optimization}
 \begin{figure*}[htb]
 \centering
-\includegraphics[width=0.7\textwidth]{boxplot}
-\caption{test}
+\includegraphics[width=\textwidth]{boxplot}
+\caption{optimization among all dataset}
 \label{fig:boxplot}
 \end{figure*}
 To achieve the goal of determining the offset of the camera mounted on the robot, recourse was made to a six-variable optimization. Following the parameters obtained previously, summarized in the table, were used as the maximum and minimum limits of the search space along with other parameters to determine: the distance from the robot center, the angle of rotation with respect to the reference system and the camera's orientation.
@@ -132,8 +132,12 @@ The optimization is performed for all the datasets thus returning four best comb
 \item extreme values, represented by blacks hatches;
 \item the median values, represented by the red segment;
 \end{itemize}
-
+\pagebreak
+In the first box at the top is show the distribution of values for the radii of the left and right wheels evaluated for the four datasets.
+In the box in the middle shows the orientation values and camera distance from the center of robot minimized for the data. 
+Finally, the same for the last box shows the track value dell'axle.
 After performing the optimization is unable to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo}.
+It is observed that the odometry reconstruction, represented in red, deviates from the original, in black, as odometric center of the middle of the axle track point robot, the other side of the optimal position of the calculated camera, in blue, is much closer to the original though it takes account of the displacement from the midpoint.
 \begin{figure*}[!h]
 \subfloat[][\emph{dataset 1}.]
    {\includegraphics[width=0.45\textwidth]{recostropt_701}} \,
