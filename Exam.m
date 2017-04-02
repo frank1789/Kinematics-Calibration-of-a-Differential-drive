@@ -19,7 +19,6 @@ addpath Data FuncNonLinSquare Graphics;
 filename  = char.empty;
 data      = struct.empty;
 theta     = struct.empty;
-omega     = struct.empty;
 Phi_theta = double.empty;
 Phi_XY    = double.empty;
 P_xy      = double.empty;
@@ -79,12 +78,12 @@ end
 
 % Determinate camera's offset - Optimization
 % Set experiments' matrix
-% 1st parameter [12 <-> 18] =  right radius
-% 2nd parameter [12 <-> 18] =  left radius
-% 3rd parameter [51 <-> 60] =  axle track
+% 1st parameter [12 <-> 18]  =  right radius
+% 2nd parameter [12 <-> 18]  =  left radius
+% 3rd parameter [51 <-> 60]  =  axle track
 % 4th parameter [-pi <-> pi] =  beta
-% 5th parameter [5 <-> 30] = ->   d
-% 6th parameter [pi/2 <-> pi] =   alpha
+% 5th parameter [5 <-> 30]   =  d
+% 6th parameter [pi/2 <-> pi] = alpha
 lb = [12   12   51 -pi  5 pi/2];    % lower bound
 ub = [17.6 17.6 57  pi 30 pi];      % upper bound
 % number of samples
@@ -98,13 +97,20 @@ parameters = bsxfun(@plus,lb,bsxfun(@times,xn,(ub-lb)));
 % Search combination with minimum error
 parfor i = 1:4
     [e{i}] = objfun(data{i}, parameters);
-    [min_Obj{i}, idx{i}] = min(e{i});
+    [min_Obj{i}, index{i}] = min(e{i});
 end
+
 % Initiliaze variable
 pose = double.empty;
 for i = 1:4
-    pose{i} = odometricRecostruction(data{i},idx{i},parameters,i);
-    %graphOdometricCamera( data{i}, pose{i}, i );
+    
+    % Odometric recostruction with optimized parameters
+    pose{i} = odometricRecostruction(data{i}, index{i}, parameters, i);
+    
+    % Generate plot 
+    graphOdometricCam( data{i}, parameters, index{i}, i); 
 end
 
+% Generate box-plot for optimized parameters 
+graphOptimization( parameters, index )
 diary off
