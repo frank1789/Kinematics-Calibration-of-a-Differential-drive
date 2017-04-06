@@ -1,16 +1,16 @@
-function graphOdometricCam(data, parameters, index, i)
+function graphOdometricCam(data, parameters, n)
 % OBJFUN calculates error for every configuration of parameters return
 % error along the path
 
 % Encoder resolution (multiplied by gear train ratio)
 res_encoder = 16384 * 25;
 
-fprintf('Progress analisys dataset: %i\n', i);
+fprintf('Progress analisys dataset: %i\n', n);
     
     % Initialize local variable
-    radwheelL = parameters(index,1);
-    radwheelR = parameters(index,2);
-    track     = parameters(index,3);
+    radwheelL = parameters(1);
+    radwheelR = parameters(2);
+    track     = parameters(3);
     [ diffleft, diffright ] = tick2differenceTick( data );
     
     % Initialize array and calc new position
@@ -31,9 +31,9 @@ fprintf('Progress analisys dataset: %i\n', i);
     newpose.psi(1) = [];
 
     % Offset performance
-    d = parameters(index,5);     
-    alpha = parameters(index,6); 
-    beta = parameters(index,4);  % rotation between camera and robot reference frames
+    d     = parameters(5);     
+    alpha = parameters(6); 
+    beta  = parameters(4);  % rotation between camera and robot reference frames
 
     % data.pose.psi = Camera's absolute orientation angle
     xcr = data.pose.x - d*cos(alpha + data.pose.psi - beta);

@@ -1,4 +1,4 @@
-function [ newpose ] = odometricRecostruction ( data, index, parameters,i )
+function [ newpose ] = odometricRecostruction ( data, parameters )
 %ODOMETRICRECOSTRUCTION evaluate a recstruction robot position after
 % findout offset camera respect center of robot
 
@@ -18,17 +18,16 @@ function [ newpose ] = odometricRecostruction ( data, index, parameters,i )
 res_encoder = 16384 * 25;
 [ diffleft, diffright ] = tick2differenceTick( data );
 
-fprintf('Configuration minimum error: %i on dataset: %i\n',index, i);
-fprintf('right wheel radius:\t%f\n',parameters(index,1));
-fprintf('left wheel radius:\t%f\n',parameters(index,2));
-fprintf('track:\t%f\n',parameters(index,3));
-fprintf('beta:\t%f\n',parameters(index,4));
-fprintf('d:\t%f\n',parameters(index,5));
-fprintf('alpha:\t%f\n',parameters(index,6));
+fprintf('right wheel radius:\t%f\n',parameters(1));
+fprintf('left wheel radius:\t%f\n',parameters(2));
+fprintf('track:\t%f\n',parameters(3));
+fprintf('beta:\t%f\n',parameters(4));
+fprintf('d:\t%f\n',parameters(5));
+fprintf('alpha:\t%f\n',parameters(6));
 
-radwheelR = parameters(index,1);
-radwheelL = parameters(index,2);
-track     = parameters(index,3);
+radwheelR = parameters(1);
+radwheelL = parameters(2);
+track     = parameters(3);
 
 % Initialize array and calc new position
 newpose.x(1)   = data.pose.x(1);

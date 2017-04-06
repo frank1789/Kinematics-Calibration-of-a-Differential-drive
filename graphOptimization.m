@@ -1,8 +1,8 @@
-function graphOptimization( parameters, index )
+function graphOptimization( parameters )
 
 % Instanziate vecotrs of radii
-Left  = [parameters(index{1},1); parameters(index{2},1); parameters(index{3},1); parameters(index{4},1)];
-Right = [parameters(index{1},2); parameters(index{2},2); parameters(index{3},2); parameters(index{4},2)];
+Left  = [parameters{1}(1); parameters{2}(1); parameters{3}(1); parameters{4}(1)];
+Right = [parameters{1}(2); parameters{2}(2); parameters{3}(2); parameters{4}(2)];
 
 % Collect 
 collectRadidus = [Left, Right];
@@ -11,12 +11,12 @@ collectRadidus = [Left, Right];
 NameRadii = ['Left ';'Right'];
 
 % Generate boxplot for track       
-track = [parameters(index{1},3); parameters(index{2},3); parameters(index{3},3); parameters(index{4},3)];
+track = [parameters{1}(3); parameters{2}(3); parameters{3}(3); parameters{4}(3)];
 
-% other parameters
-beta = [parameters(index{1},4); parameters(index{2},4); parameters(index{3},3); parameters(index{4},4)];
-d    = [parameters(index{1},5); parameters(index{2},5); parameters(index{3},5); parameters(index{4},5)];
-alpha= [parameters(index{1},6); parameters(index{2},6); parameters(index{3},6); parameters(index{4},6)];
+% other parameters{}
+beta = [parameters{1}(4); parameters{2}(4); parameters{3}(3); parameters{4}(4)];
+d    = [parameters{1}(5); parameters{2}(5); parameters{3}(5); parameters{4}(5)];
+alpha= [parameters{1}(6); parameters{2}(6); parameters{3}(6); parameters{4}(6)];
 figure();
 
 subplot(3,1,1)

@@ -24,6 +24,7 @@ Phi_XY    = double.empty;
 P_xy      = double.empty;
 P_angle   = double.empty;
 newpose   = struct.empty;
+pose      = double.empty;
 
 % Pattern for file input
 delimiterIn = ' ';
@@ -78,39 +79,33 @@ end
 
 % Determinate camera's offset - Optimization
 % Set experiments' matrix
-% 1st parameter [12 <-> 18]  =  right radius
-% 2nd parameter [12 <-> 18]  =  left radius
-% 3rd parameter [51 <-> 60]  =  axle track
-% 4th parameter [-pi <-> pi] =  beta
-% 5th parameter [5 <-> 30]   =  d
-% 6th parameter [pi/2 <-> pi] = alpha
-lb = [12   12   51 -pi  5 pi/2];    % lower bound
-ub = [17.6 17.6 57  pi 30 pi];      % upper bound
-% number of samples
-n = 25000;  
-% number of parameters
-p = 6;
-% generate normalized design
-xn = lhsdesign(n,p);         
-parameters = bsxfun(@plus,lb,bsxfun(@times,xn,(ub-lb)));
+% 1st parameter [12 <-> 17.6]  =  right radius
+% 2nd parameter [12 <-> 17.6]  =  left radius
+% 3rd parameter [51 <-> 57]    =  axle track
+% 4th parameter [-pi <-> pi]   =  beta
+% 5th parameter [5 <-> 30]     =  d
+% 6th parameter [pi/2 <-> pi]  = alpha
+LB = [12   12   51 -pi  5 pi/2];    % lower bound
+UB = [17.6 17.6 57  pi 30 pi];      % upper bound
 
-% Search combination with minimum error
+% number of parameters
+nvars = 6;
+
+% Minimizing function using ga
 parfor i = 1:4
-    [e{i}] = objfun(data{i}, parameters);
-    [min_Obj{i}, index{i}] = min(e{i});
+    ObjectiveFunction = @(x)gaerror(x, data{i});
+    [ parameters{i}, fval{i} ] = ga(ObjectiveFunction,nvars,[],[],[],[],LB,UB)
 end
 
-% Initiliaze variable
-pose = double.empty;
 for i = 1:4
     
     % Odometric recostruction with optimized parameters
-    pose{i} = odometricRecostruction(data{i}, index{i}, parameters, i);
+    pose{i} = odometricRecostruction(data{i}, parameters{i});
     
     % Generate plot 
-    graphOdometricCam( data{i}, parameters, index{i}, i); 
+    graphOdometricCam( data{i}, parameters{i},i); 
 end
 
 % Generate box-plot for optimized parameters 
-graphOptimization( parameters, index )
+graphOptimization( parameters )
 diary off
