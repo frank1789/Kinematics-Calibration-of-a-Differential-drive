@@ -29,7 +29,7 @@ newpose.y(1)   = [];
 newpose.psi(1) = [];
 
 % Offset performance
-dist       = inputparams(5);
+dist    = inputparams(5);
 alpha   = inputparams(6);
 beta    = inputparams(4);  % rotation between camera and robot reference frames
 
@@ -37,13 +37,14 @@ beta    = inputparams(4);  % rotation between camera and robot reference frames
 x_offset = data.pose.x - dist*cos(alpha + data.pose.psi - beta);
 y_offset = data.pose.y - dist*sin(alpha + data.pose.psi - beta);
 % Robot's absolute orientation angle -> Psi = theta - beta
-psi = data.pose.psi - beta;
+xhi = data.pose.psi - beta;
 
 % Objective function, adjust newpose to perform difference
 X_err     = x_offset - newpose.x.';
 Y_err     = y_offset - newpose.y.';
-THETA_err = psi - newpose.psi.';
+XHI_err = xhi - newpose.psi.';
+
 % total error
-error = rms(X_err + Y_err + THETA_err);
+error = rms(X_err + Y_err + XHI_err);
 
 end
