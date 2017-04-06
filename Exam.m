@@ -13,7 +13,7 @@ diary debug.txt
 
 % Call function and dataset
 addpath (genpath('Modeling/'));
-addpath Data FuncNonLinSquare Graphics;
+addpath Data FuncNonLinSquare Graphics Optimization;
 
 % Preallocate variable
 filename  = char.empty;
