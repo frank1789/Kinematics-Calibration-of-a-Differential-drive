@@ -107,13 +107,13 @@ It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes
 \begin{figure*}[htb]
 \centering
 \subfloat[][\emph{dataset 1}.]
-   {\includegraphics[width=0.45\textwidth]{odocam_1.eps}} \,
+   {\includegraphics[width=0.45\textwidth]{odometric_1.eps}} \,
 \subfloat[][\emph{dataset 2}.]
-   {\includegraphics[width=0.45\textwidth]{odocam_2.eps}} \\
+   {\includegraphics[width=0.45\textwidth]{odometric_2.eps}} \\
 \subfloat[][\emph{dataset 3}.]
-   {\includegraphics[width=0.45\textwidth]{odocam_3.eps}} \,
+   {\includegraphics[width=0.45\textwidth]{odometric_3.eps}} \,
 \subfloat[][\emph{dataset 4}.]
-   {\includegraphics[width=0.45\textwidth]{odocam_4.eps}}
+   {\includegraphics[width=0.45\textwidth]{odometric_4.eps}}
 \caption{Odometry reconstruction}
 \label{fig:OdoRec}
 \end{figure*}
@@ -125,29 +125,67 @@ It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes
 \caption{optimization among all dataset}
 \label{fig:boxplot}
 \end{figure*}
-To achieve the goal of determining the offset of the camera mounted on the robot, recourse was made to a six-variable optimization. Following the parameters obtained previously, summarized in the table, were used as the maximum and minimum limits of the search space along with other parameters to determine: the distance from the robot center, the angle of rotation with respect to the reference system and the camera's orientation.
-It is made of a matrix containing a large number of samples to cover a large number of combinations of these parameters generated randomly.
-\\Were analyzed by a function that minimizes the error between ritch recorded by the camera and what rebuilt with odometry, thus they are obtained the values sought.\\
-The optimization is performed for all the datasets thus returning four best combinations for each path, shows the values in a box plot in fig.  \ref{fig:boxplot}, where it is possible to observe:
+To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable optimization. oppurtanamente choices using six variables:. Using the parameters obtained previously, summarized in the table, they were used as the boundary conditions limits.
+The algorithm used is part of the family of \emph{genetic algorithms} used for finding optimal solution.
+In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible.\\
+The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.
+A typical genetic algorithm requires:
 \begin{itemize}
-\item extreme values, represented by blacks hatches;
-\item the median values, represented by the red segment;
+\item a genetic representation of the solution domain,
+\item a fitness function to evaluate the solution domain.
 \end{itemize}
-In the first box at the top is show the distribution of values for the radii of the left and right wheels evaluated for the four datasets.
-In the box in the middle shows the orientation values and camera distance from the center of robot minimized for the data. \\
-Finally, the same for the last box shows the track value dell'axle.
-After performing the optimization is unable to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo}.
+A standard representation of each candidate solution is as an array of bits. Arrays of other types and structures can be used in essentially the same way. The main property that makes these genetic representations convenient is that their parts are easily aligned due to their fixed size, which facilitates simple crossover operations. Variable length representations may also be used, but crossover implementation is more complex in this case. Tree-like representations are explored in genetic programming and graph-form representations are explored in evolutionary programming; a mix of both linear chromosomes and trees is explored in gene expression programming.
+Once the genetic representation and the fitness function are defined, a GA proceeds to initialize a population of solutions and then to improve it through repetitive application of the mutation, crossover, inversion and selection operators.
+The population size depends on the nature of the problem, but typically contains several hundreds or thousands of possible solutions. Often, the initial population is generated randomly, allowing the entire range of possible solutions (the search space). Occasionally, the solutions may be "seeded" in areas where optimal solutions are likely to be found.
+During each successive generation, a portion of the existing population is selected to breed a new generation. Individual solutions are selected through a fitness-based process, where fitter solutions (as measured by a fitness function) are typically more likely to be selected. Certain selection methods rate the fitness of each solution and preferentially select the best solutions. Other methods rate only a random sample of the population, as the former process may be very time-consuming.
+The fitness function is defined over the genetic representation and measures the quality of the represented solution. The fitness function is always problem dependent. For instance, in the knapsack problem one wants to maximize the total value of objects that can be put in a knapsack of some fixed capacity. A representation of a solution might be an array of bits, where each bit represents a different object, and the value of the bit (0 or 1) represents whether or not the object is in the knapsack. Not every such representation is valid, as the size of objects may exceed the capacity of the knapsack. The fitness of the solution is the sum of values of all objects in the knapsack if the representation is valid, or $0$ otherwise.
+In some problems, it is hard or even impossible to define the fitness expression; in these cases, a simulation may be used to determine the fitness function value of a phenotype, or even interactive genetic algorithms are used.
+The next step is to generate a second generation population of solutions from those selected through a combination of genetic operators: crossover, and mutation.
+For each new solution to be produced, a pair of "parent" solutions is selected for breeding from the pool selected previously. By producing a "child" solution using the above methods of crossover and mutation, a new solution is created which typically shares many of the characteristics of its "parents". New parents are selected for each new child, and the process continues until a new population of solutions of appropriate size is generated. Although reproduction methods that are based on the use of two parents are more "biology inspired", some research suggests that more than two "parents" generate higher quality chromosomes.
+These processes ultimately result in the next generation population of chromosomes that is different from the initial generation. Generally the average fitness will have increased by this procedure for the population, since only the best organisms from the first generation are selected for breeding, along with a small proportion of less fit solutions. These less fit solutions ensure genetic diversity within the genetic pool of the parents and therefore ensure the genetic diversity of the subsequent generation of children.
+Although crossover and mutation are known as the main genetic operators, it is possible to use other operators such as regrouping, colonization-extinction, or migration in genetic algorithms.
+It is worth tuning parameters such as the mutation probability, crossover probability and population size to find reasonable settings for the problem class being worked on. A very small mutation rate may lead to genetic drift (which is non-ergodic in nature). A recombination rate that is too high may lead to premature convergence of the genetic algorithm. A mutation rate that is too high may lead to loss of good solutions, unless elitist selection is employed.
+This generational process is repeated until a termination condition has been reached. Common terminating conditions are:
+\begin{itemize}
+\item A solution is found that satisfies minimum criteria
+\item Fixed number of generations reached
+\item Allocated budget (computation time/money) reached
+\item The highest ranking solution's fitness is reaching or has reached a plateau such that successive iterations no longer produce better results
+\item Manual inspection
+\item Combinations of the above
+\end{itemize}
+
+It is made of a fitness function that evaluates the difference of posione and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data. By obtaining, thanks to the peculiarities of genetic recombination algorithms, the minimum for the function as the best possible combination.
+The optimization is performed on all the datasets, thus returning four best combinations for the route in the boxplot, in the figure \ref{fig:boxplot}, it is possible to observe the behavior of the four best samples:
+\begin{itemize}
+\item extreme values, represented black dashed lines;
+\item median values, represented by the red segment;
+\end{itemize}
+In the first box at the top it shows the distribution of values for the radii's wheels left and right evaluated for the four data series.
+In mid box shows the orientation values and camera distance from robot's center.
+Finally, the same for the last box shows the track value.
+After performing the optimization is unable to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo1}--\ref{fig:OptiOdo2}--\ref{fig:OptiOdo3}--\ref{fig:OptiOdo4}.
 It is observed that the odometry reconstruction, represented in red, deviates from the original, in black, as odometric center of the middle of the axle track point robot, the other side of the optimal position of the calculated camera, in blue, is much closer to the original though it takes account of the displacement from the midpoint.
-\begin{figure*}[!htb]
-\centering
-\subfloat[][\emph{dataset 1}.]
-   {\includegraphics[width=0.45\textwidth]{recostropt_701}} \,
-\subfloat[][\emph{dataset 2}.]
-   {\includegraphics[width=0.45\textwidth]{recostropt_807}}\\
-\subfloat[][\emph{dataset 3}.]
-   {\includegraphics[width=0.45\textwidth]{recostropt_896}} \,
-\subfloat[][\emph{dataset 4}.]
-   {\includegraphics[width=0.45\textwidth]{recostropt_918}}
-\caption{Optimal odometric and camera position}
-\label{fig:OptiOdo}
-\end{figure*}
+\begin{figure}[htb]
+   {\includegraphics[width=0.5\textwidth]{recostropt_1}}
+   \caption{Optimal odometric and camera position, dataset: 1}
+   \label{fig:OptiOdo1}
+\end{figure}
+
+\begin{figure}[h]
+   {\includegraphics[width=0.5\textwidth]{recostropt_2}}
+   \caption{Optimal odometric and camera position, dataset: 2}
+   \label{fig:OptiOdo2}
+\end{figure}
+
+\begin{figure}[h]
+   {\includegraphics[width=0.5\textwidth]{recostropt_3}} 
+   \caption{Optimal odometric and camera position, dataset: 3}
+   \label{fig:OptiOdo3}
+\end{figure}
+
+\begin{figure}[h]
+   {\includegraphics[width=0.5\textwidth]{recostropt_4}}
+\caption{Optimal odometric and camera position, dataset: 4}
+\label{fig:OptiOdo4}
+\end{figure}

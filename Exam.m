@@ -78,13 +78,13 @@ for i = 1:4
 end
 
 % Determinate camera's offset - Optimization
-% Set experiments' matrix
+% Set boundary conditions
 % 1st parameter [12 <-> 17.6]  =  right radius
 % 2nd parameter [12 <-> 17.6]  =  left radius
 % 3rd parameter [51 <-> 57]    =  axle track
 % 4th parameter [-pi <-> pi]   =  beta
-% 5th parameter [5 <-> 30]     =  d
-% 6th parameter [pi/2 <-> pi]  = alpha
+% 5th parameter [5 <-> 30]     =  distance from center
+% 6th parameter [pi/2 <-> pi]  =  alpha
 LB = [12   12   51 -pi  5 pi/2];    % lower bound
 UB = [17.6 17.6 57  pi 30 pi];      % upper bound
 
@@ -97,6 +97,9 @@ parfor i = 1:4
     [ parameters{i}, fval{i} ] = ga(ObjectiveFunction,nvars,[],[],[],[],LB,UB)
 end
 
+% Save optimization data
+save garesult.mat parameters
+%%
 for i = 1:4
     
     % Odometric recostruction with optimized parameters

@@ -31,38 +31,27 @@ fprintf('Progress analisys dataset: %i\n', n);
     newpose.psi(1) = [];
 
     % Offset performance
-    d     = parameters(5);     
+    dist  = parameters(5);     
     alpha = parameters(6); 
     beta  = parameters(4);  % rotation between camera and robot reference frames
 
     % data.pose.psi = Camera's absolute orientation angle
-    xcr = data.pose.x - d*cos(alpha + data.pose.psi - beta);
-    ycr = data.pose.y - d*sin(alpha + data.pose.psi - beta);
-    % Robot's absolute orientation angle -> Psi = theta - beta
-    Psi = data.pose.psi - beta; 
-    
-    % Objective function, adjust newpose to perform difference
-    X_err     = xcr - newpose.x.';
-    Y_err     = ycr - newpose.y.';
-    THETA_err = Psi - newpose.psi.';
-    
+    x_corr = data.pose.x - dist * cos(alpha + data.pose.psi - beta);
+    y_corr = data.pose.y - dist * sin(alpha + data.pose.psi - beta);
+
     % Print plot and save
     figure();
     hold on
     axis equal
     grid on
     originalcampose = plot(data.pose.x,data.pose.y,'k');
-    odometricpose = plot(newpose.x,newpose.y,'r');
-    correctcampose = plot(xcr,ycr);
+    odometricpose   = plot(newpose.x,newpose.y,'r');
+    correctcampose  = plot(x_corr,y_corr);
     xlabel('[cm]')
     ylabel('[cm]')
-    legend([originalcampose odometricpose correctcampose],'original camera pose','odometric pose', 'camera s offset pose');
+    legend([originalcampose odometricpose correctcampose],'original camera pose','odometric pose', 'camera offset pose');
     hold off
-    fname = sprintf('recostropt_%d', i);
-    checkfile{i} = ['recostropt_' num2str(i) '.eps'];
-    if exist(checkfile{i}, 'file') == 2
-        fprintf('File: %s,already exist\n', fname)
-    else
-        print(fname,'-depsc','-tiff','-r0');
-    end
+    fname = sprintf('recostropt_%d', n);
+    print(fname,'-depsc','-tiff','-r0');
+
 end
