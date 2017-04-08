@@ -5,12 +5,6 @@ close all;
 clear;
 clc;
 
-% Initialize debug file
-if exist('debug.txt', 'file') == 2
-    delete('debug.txt');
-end
-diary debug.txt
-
 % Call function and dataset
 addpath (genpath('Modeling/'));
 addpath Data FuncNonLinSquare Graphics Optimization;
@@ -76,7 +70,11 @@ for i = 1:4
     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
     graphOdometricCamera( data{i}, newpose{i}, i );
 end
+pause(2)
+close all
+pause(2)
 
+%% START OPTIMIZATION GA
 % Determinate camera's offset - Optimization
 % Set boundary conditions
 % 1st parameter [12 <-> 17.6]  =  right radius
@@ -84,22 +82,26 @@ end
 % 3rd parameter [51 <-> 57]    =  axle track
 % 4th parameter [-pi <-> pi]   =  beta
 % 5th parameter [5 <-> 30]     =  distance from center
-% 6th parameter [pi/2 <-> pi]  =  alpha
-LB = [12   12   51 -pi  5 pi/2];    % lower bound
-UB = [17.6 17.6 57  pi 30 pi];      % upper bound
+% 6th parameter [-pi <-> pi]  =  alpha
+LB = [12   12   51 -pi  5 -pi];    % lower bound
+UB = [17.6 17.6 60  pi 30 pi];      % upper bound
 
-% number of parameters
+% number of variable
 nvars = 6;
 
 % Minimizing function using ga
+opts = optimoptions(@ga,'PlotFcn',{@gaplotbestf,@gaplotstopping});
 parfor i = 1:4
+    
     ObjectiveFunction = @(x)gaerror(x, data{i});
-    [ parameters{i}, fval{i} ] = ga(ObjectiveFunction,nvars,[],[],[],[],LB,UB)
+    [ parameters{i}, Fval{i},exitFlag{i},Output{i} ] = ga(ObjectiveFunction,nvars,[],[],[],[],LB,UB,[],opts);
+    
+    fprintf('\nDataset: %d\n', i);
+    fprintf('\tThe number of generations was : %d\n', Output{i}.generations);
+    fprintf('\tThe number of function evaluations was : %d\n', Output{i}.funccount);
+    fprintf('\tThe best function value found was : %g\n', Fval{i});
 end
 
-% Save optimization data
-save garesult.mat parameters
-%%
 for i = 1:4
     
     % Odometric recostruction with optimized parameters
@@ -111,4 +113,3 @@ end
 
 % Generate box-plot for optimized parameters 
 graphOptimization( parameters )
-diary off
