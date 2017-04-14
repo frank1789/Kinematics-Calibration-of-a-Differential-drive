@@ -5,26 +5,20 @@ close all;
 clear;
 clc;
 
-% Initialize debug file
-if exist('debug.txt', 'file') == 2
-    delete('debug.txt');
-end
-diary debug.txt
-
 % Call function and dataset
 addpath (genpath('Modeling/'));
-addpath Data FuncNonLinSquare Graphics;
+addpath Data FuncNonLinSquare Graphics Optimization;
 
 % Preallocate variable
 filename  = char.empty;
 data      = struct.empty;
 theta     = struct.empty;
-omega     = struct.empty;
 Phi_theta = double.empty;
 Phi_XY    = double.empty;
 P_xy      = double.empty;
 P_angle   = double.empty;
 newpose   = struct.empty;
+pose      = double.empty;
 
 % Pattern for file input
 delimiterIn = ' ';
@@ -76,35 +70,44 @@ for i = 1:4
     graph_pose(data{i}.pose.x, data{i}.pose.y, i);
     graphOdometricCamera( data{i}, newpose{i}, i );
 end
+pause(2)
+close all
+pause(2)
 
+%% START OPTIMIZATION GA
 % Determinate camera's offset - Optimization
-% Set experiments' matrix
-% 1st parameter [12 <-> 18] =  right radius
-% 2nd parameter [12 <-> 18] =  left radius
-% 3rd parameter [51 <-> 60] =  axle track
-% 4th parameter [-pi <-> pi] =  beta
-% 5th parameter [5 <-> 30] = ->   d
-% 6th parameter [pi/2 <-> pi] =   alpha
-lb = [12   12   51 -pi  5 pi/2];    % lower bound
-ub = [17.6 17.6 57  pi 30 pi];      % upper bound
-% number of samples
-n = 25000;  
-% number of parameters
-p = 6;
-% generate normalized design
-xn = lhsdesign(n,p);         
-parameters = bsxfun(@plus,lb,bsxfun(@times,xn,(ub-lb)));
+% Set boundary conditions
+% 1st parameter [12 <-> 17.6]  =  right radius
+% 2nd parameter [12 <-> 17.6]  =  left radius
+% 3rd parameter [51 <-> 57]    =  axle track
+% 4th parameter [-pi <-> pi]   =  beta
+% 5th parameter [5 <-> 30]     =  distance from center
+% 6th parameter [-pi <-> pi]  =  alpha
+LB = [12   12   51 -pi  5 -pi];    % lower bound
+UB = [17.6 17.6 60  pi 30 pi];      % upper bound
 
-% Search combination with minimum error
+% number of variable
+nvars = 6;
+
+% Minimizing function using ga
+opts = optimoptions(@ga,'PlotFcn',{@gaplotbestf,@gaplotstopping});
 parfor i = 1:4
-    [e{i}] = objfun(data{i}, parameters);
-    [min_Obj{i}, idx{i}] = min(e{i});
+    
+    ObjectiveFunction = @(x)gaerror(x, data{i});
+    [ parameters{i}, Fval{i},exitFlag{i},Output{i} ] = ga(ObjectiveFunction,nvars,[],[],[],[],LB,UB,[],opts);
+    
+    fprintf('\nDataset: %d\n', i);
+    fprintf('\tThe number of generations was : %d\n', Output{i}.generations);
+    fprintf('\tThe number of function evaluations was : %d\n', Output{i}.funccount);
+    fprintf('\tThe best function value found was : %g\n', Fval{i});
 end
-% Initiliaze variable
-pose = double.empty;
+%%
+load gaoptimvalue
 for i = 1:4
-    pose{i} = odometricRecostruction(data{i},idx{i},parameters,i);
-    %graphOdometricCamera( data{i}, pose{i}, i );
+    
+    % Generate plot 
+    graphOdometricCam( data{i}, parameters{i},i); 
 end
 
-diary off
+% Generate box-plot for optimized parameters 
+graphOptimization( parameters )

@@ -33,5 +33,6 @@ end
 
 % Free local variable
 clearvars odometricX odometricY cameraX cameraY odostr camstr str fname
+pause(1);
 
 end

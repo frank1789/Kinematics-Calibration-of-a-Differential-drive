@@ -1,27 +1,34 @@
-function [ w1, w2 , ell_angle ] = Covariance2EllipseParameters( D, p )
-%COVARIANCE2ELLIPSEPARAMETERS Summary of this function goes here
-%   Detailed explanation goes here
+function [w1, w2, ell_angle] = Covariance2EllipseParameters(CovarianceMatrix, Pr)
 
-% A =  D(1,1);
-% B =  D(1,2)+D(2,1);
-% C = D(2,2);
-% 
-% k = -2*(log(1-p));
-% 
-% 
-% ell_angle = 0.5*atan2(-2*B,(A-C));
-% 
-% T = sqrt(A^2+C^2-2*A*C+4*B^2);
-% 
-% w1 = sqrt(2*k^2/(A+C-T));
-% 
-% w2 = sqrt(2*k/(A+C+T));
+K_square = -2*log( 1 - Pr );  % log = ln -> (logaritmo naturale)
 
-[vectors,value] = eig(D);
-k = 2*log(1/(1-p));
-w1 = sqrt(k*value(1,1));
-w2 = sqrt(k*value(2,2));
-ell_angle = atan2(real(vectors(2,1)),real(vectors(1,1)));
+[ eig_vectors, eig_values ] = eig( CovarianceMatrix );
 
-end 
+% Get the largest eigenvalue
+max_evl = max(max(eig_values));
 
+% Get the index of the largest eigenvector
+[max_evector_idx, r] = find(eig_values == max_evl);
+max_evc = eig_vectors(:,max_evector_idx);  % [2X1]
+
+% Get the smallest eigenvector and eigenvalue
+if(max_evector_idx == 1)
+    min_evl = max(eig_values(:,2));
+    min_evc = eig_vectors(:,2);
+else
+    min_evl = max(eig_values(:,1));
+    min_evc = eig_vectors(:,1);
+end
+
+
+w1 = sqrt( K_square * max_evl );
+w2 = sqrt( K_square * min_evl );
+ell_angle = atan2( max_evc(2), max_evc(1) );
+
+% This angle is between -pi and pi.
+% Let's shift it such that the angle is between 0 and 2pi
+if(ell_angle < 0)
+    ell_angle = ell_angle + 2*pi;
+end
+
+end

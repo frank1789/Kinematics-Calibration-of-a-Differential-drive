@@ -11,7 +11,6 @@
  \draw [rounded corners=15,pattern=crosshatch, pattern color=gray] (0.5, 2.5)  rectangle (1.5, 5.5);
  \draw [rounded corners=15,pattern=crosshatch, pattern color=gray] (6.5, 2.5) rectangle (7.5, 5.5);
  \draw (1.5, 4) -- (6.5, 4);
- \draw (4, 4) -- (4, 6);
  % quote wheel
  \dimline  [color=gray, 
                  %line style={thick},
@@ -51,6 +50,6 @@
  	\coordinate (Rx) at ($(R)+1*(22.5:1)$);
  	\coordinate (Ry) at ($(R)+1*(90+22.5:1)$);
  	\fill (R) circle (1.4pt);
-	 \draw [->, green] (R) -- (Ry) node[left] {$y_{cam}$};
- 	 \draw [->, green] (R) -- (Rx) node[above]{$x_{cam}$};
+	 \draw [->, darkgray] (R) -- (Ry) node[left] {$y_{cam}$};
+ 	 \draw [->, darkgray] (R) -- (Rx) node[above]{$x_{cam}$};
  \end{tikzpicture}
