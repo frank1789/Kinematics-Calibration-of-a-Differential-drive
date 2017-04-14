@@ -101,11 +101,9 @@ parfor i = 1:4
     fprintf('\tThe number of function evaluations was : %d\n', Output{i}.funccount);
     fprintf('\tThe best function value found was : %g\n', Fval{i});
 end
-
+%%
+load gaoptimvalue
 for i = 1:4
-    
-    % Odometric recostruction with optimized parameters
-    pose{i} = odometricRecostruction(data{i}, parameters{i});
     
     % Generate plot 
     graphOdometricCam( data{i}, parameters{i},i); 

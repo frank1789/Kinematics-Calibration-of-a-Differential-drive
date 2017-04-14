@@ -1,6 +1,6 @@
 \section{Methods}
 \subsection{Kinematic Model}
-For the analysis of differential wheelchair drive parameters using a simplified model in the reference system own odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation functional \ref{eq:velocityrelation}. The other two support wheels are considered passive. This schematization is observable in the fig. \ref{fig:model}.
+For the analysis of differential wheelchair drive parameters using a simplified model in the reference system own odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation functional \ref{eq:velocityrelation}. The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
 \begin{equation}
 \label{eq:velocityrelation}
 	\left[ \begin{array}{cc}
@@ -39,12 +39,12 @@ The odometry of a vehicle is usually implemented by discrete-time integration, s
 		y_{k+1} = y_{k} + T \, v_{k} \, sin(\theta_{k} + T \, \omega_{k}/2)\\
 		\theta_{k+1} = \theta_{k} + T \, \omega_{k}
 	\end{cases}
-\end{equation}           
+\end{equation}
 Notice that low sampling frequency and high vehicle velocities can be a significant source of odometric error.
 \input{dataanalysis}
 \subsection{Calibration Techinque}
-To estimate the parameters of the robot expressed in the equation \ref{eq:Cmatrix}, namely, the wheel radius values indicated with "$r_\textsc{r}$" and "$r_\textsc{l}$", and the axle track as indicated "$b$", using the method described in the report \cite{1512356}.
-Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The datasets supplied information related to: the camera position $x, y, \psi$ and increments of the encoder.
+To estimate the parameters of the robot expressed in the equation \ref{eq:Cmatrix}, namely, the wheel radius values indicated with ``$r_\textsc{r}$" and ``$r_\textsc{l}$", and the axle track as indicated ``$b$", using the method described in the report \cite{1512356}.
+Experiments of odometry calibration require measurement of the absolute position and orientation of the mobile robot at suitable locations along the motion trajectories. For instance this calibration technique requires measurement of the starting and final robot configuration for each motion execution. The datasets supplied information related to: the camera position $x, y, \theta$ and increments of the encoder.
 Each information is saved in columns:
 \begin{itemize}
 \item column 1: acquisistions time [ms];
@@ -87,12 +87,12 @@ It has been chosen to perform the odometry calibration whereas in the same calcu
     	0.2823 &  -0.2807
 	\end{bmatrix}
 \end{equation}
-It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values, $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because formerly esti- mated at c1,j therefore do not contain the error propagation. Subsequently, it calcu- lates the average between the values of the obtained rays and the standard deviation, these are shown in the table (\ref{tab:recapvalue}).
+It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values, $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because formerly esti- mated at $c_{1,j}$ therefore do not contain the error propagation. Subsequently, it calcu- lates the average between the values of the obtained rays and the standard deviation, these are shown in table (\ref{tab:recapvalue}).
 \begin{table}[!h]
 \centering
 	\begin{tabular}{lccc}
 		\hline
-								& Radius 	& Mean 	& standard  \\
+								& Radius 	& Mean 	& standard\\
 								&	[mm]	& [mm]	& deviation [mm]\\
 		\hline
 		$r_\textsc{r}$	&	$130.457$		& $147.102	$		&	$\pm23.538$\\
@@ -103,7 +103,7 @@ It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes
 \caption{estimated value}
 \label{tab:recapvalue}
 \end{table}
-\\Finally, we show in the figures \ref{fig:OdoRec}, it shows the calcu- lation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
+\\Finally, we show in figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
 \begin{figure*}[htb]
 \centering
 \subfloat[][\emph{dataset 1}.]
@@ -125,23 +125,23 @@ It is noted that the parameters $c_ {1,1}$ and $c_ {1,2}$ relative to the spokes
 \caption{optimization among all dataset}
 \label{fig:boxplot}
 \end{figure*}
-To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable optimization. oppurtanamente choices using six variables:. Using the parameters obtained previously, summarized in the table, they were used as the boundary conditions limits.
-The algorithm used is part of the family of \emph{genetic algorithms} used for finding optimal solution.
-In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible.\\
+To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable optimization. oppurtanamente choices using six variables. Using the parameters obtained previously, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
+The algorithm used is part of the family of ``\emph{genetic algorithms} \cite{wiki:xxx}'' used for finding optimal solution.
+In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible \cite{Whitley1994}.
 The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.
 A typical genetic algorithm requires:
 \begin{itemize}
 \item a genetic representation of the solution domain,
 \item a fitness function to evaluate the solution domain.
 \end{itemize}
-A standard representation of each candidate solution is as an array of bits. Arrays of other types and structures can be used in essentially the same way. The main property that makes these genetic representations convenient is that their parts are easily aligned due to their fixed size, which facilitates simple crossover operations. Variable length representations may also be used, but crossover implementation is more complex in this case. Tree-like representations are explored in genetic programming and graph-form representations are explored in evolutionary programming; a mix of both linear chromosomes and trees is explored in gene expression programming.
+A standard representation of each candidate solution is as an array of bits\cite{Whitley1994}. Arrays of other types and structures can be used in essentially the same way. The main property that makes these genetic representations convenient is that their parts are easily aligned due to their fixed size, which facilitates simple crossover operations. Variable length representations may also be used, but crossover implementation is more complex in this case. Tree-like representations are explored in genetic programming and graph-form representations are explored in evolutionary programming; a mix of both linear chromosomes and trees is explored in gene expression programming.
 Once the genetic representation and the fitness function are defined, a GA proceeds to initialize a population of solutions and then to improve it through repetitive application of the mutation, crossover, inversion and selection operators.
-The population size depends on the nature of the problem, but typically contains several hundreds or thousands of possible solutions. Often, the initial population is generated randomly, allowing the entire range of possible solutions (the search space). Occasionally, the solutions may be "seeded" in areas where optimal solutions are likely to be found.
+The population size depends on the nature of the problem, but typically contains several hundreds or thousands of possible solutions. Often, the initial population is generated randomly, allowing the entire range of possible solutions (the search space). Occasionally, the solutions may be ``seeded" in areas where optimal solutions are likely to be found.
 During each successive generation, a portion of the existing population is selected to breed a new generation. Individual solutions are selected through a fitness-based process, where fitter solutions (as measured by a fitness function) are typically more likely to be selected. Certain selection methods rate the fitness of each solution and preferentially select the best solutions. Other methods rate only a random sample of the population, as the former process may be very time-consuming.
 The fitness function is defined over the genetic representation and measures the quality of the represented solution. The fitness function is always problem dependent. For instance, in the knapsack problem one wants to maximize the total value of objects that can be put in a knapsack of some fixed capacity. A representation of a solution might be an array of bits, where each bit represents a different object, and the value of the bit (0 or 1) represents whether or not the object is in the knapsack. Not every such representation is valid, as the size of objects may exceed the capacity of the knapsack. The fitness of the solution is the sum of values of all objects in the knapsack if the representation is valid, or $0$ otherwise.
 In some problems, it is hard or even impossible to define the fitness expression; in these cases, a simulation may be used to determine the fitness function value of a phenotype, or even interactive genetic algorithms are used.
 The next step is to generate a second generation population of solutions from those selected through a combination of genetic operators: crossover, and mutation.
-For each new solution to be produced, a pair of "parent" solutions is selected for breeding from the pool selected previously. By producing a "child" solution using the above methods of crossover and mutation, a new solution is created which typically shares many of the characteristics of its "parents". New parents are selected for each new child, and the process continues until a new population of solutions of appropriate size is generated. Although reproduction methods that are based on the use of two parents are more "biology inspired", some research suggests that more than two "parents" generate higher quality chromosomes.
+For each new solution to be produced, a pair of ``parent" solutions is selected for breeding from the pool selected previously. By producing a "child" solution using the above methods of crossover and mutation, a new solution is created which typically shares many of the characteristics of its ``parents". New parents are selected for each new child, and the process continues until a new population of solutions of appropriate size is generated. Although reproduction methods that are based on the use of two parents are more ``biology inspired", some research suggests that more than two ``parents" generate higher quality chromosomes.
 These processes ultimately result in the next generation population of chromosomes that is different from the initial generation. Generally the average fitness will have increased by this procedure for the population, since only the best organisms from the first generation are selected for breeding, along with a small proportion of less fit solutions. These less fit solutions ensure genetic diversity within the genetic pool of the parents and therefore ensure the genetic diversity of the subsequent generation of children.
 Although crossover and mutation are known as the main genetic operators, it is possible to use other operators such as regrouping, colonization-extinction, or migration in genetic algorithms.
 It is worth tuning parameters such as the mutation probability, crossover probability and population size to find reasonable settings for the problem class being worked on. A very small mutation rate may lead to genetic drift (which is non-ergodic in nature). A recombination rate that is too high may lead to premature convergence of the genetic algorithm. A mutation rate that is too high may lead to loss of good solutions, unless elitist selection is employed.
@@ -154,18 +154,17 @@ This generational process is repeated until a termination condition has been rea
 \item Manual inspection
 \item Combinations of the above
 \end{itemize}
-
-It is made of a fitness function that evaluates the difference of posione and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data. By obtaining, thanks to the peculiarities of genetic recombination algorithms, the minimum for the function as the best possible combination.
-The optimization is performed on all the datasets, thus returning four best combinations for the route in the boxplot, in the figure \ref{fig:boxplot}, it is possible to observe the behavior of the four best samples:
+\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data. By obtaining, thanks to the peculiarities of genetic recombination algorithms, the minimum for the function as the best possible combination.
+The optimization is performed on all the datasets, thus returning four best combinations for the path observable in boxplot, fig. \ref{fig:boxplot}, it is possible to observe the behavior of the four best samples:
 \begin{itemize}
 \item extreme values, represented black dashed lines;
 \item median values, represented by the red segment;
 \end{itemize}
 In the first box at the top it shows the distribution of values for the radii's wheels left and right evaluated for the four data series.
-In mid box shows the orientation values and camera distance from robot's center.
+In mid box shows the orientation values and camera distance from robot's center and realtive angle orienatation.
 Finally, the same for the last box shows the track value.
 After performing the optimization is unable to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo1}--\ref{fig:OptiOdo2}--\ref{fig:OptiOdo3}--\ref{fig:OptiOdo4}.
-It is observed that the odometry reconstruction, represented in red, deviates from the original, in black, as odometric center of the middle of the axle track point robot, the other side of the optimal position of the calculated camera, in blue, is much closer to the original though it takes account of the displacement from the midpoint.
+It is observed that the odometry reconstruction, represented in red, deviates from the original, in black, with odometric center in robot's middle axle, on the other side of the optimal position of the calculated camera, in blue, is much closer to the original though it takes account of the displacement from the midpoint previous considered.
 \begin{figure}[htb]
    {\includegraphics[width=0.5\textwidth]{recostropt_1}}
    \caption{Optimal odometric and camera position, dataset: 1}

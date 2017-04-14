@@ -46,5 +46,36 @@ fprintf('Progress analisys dataset: %i\n', n);
     hold off
     fname = sprintf('recostropt_%d', n);
     print(fname,'-depsc','-tiff','-r0');
-
+    
+    % with covariance without saving
+    
+    % pre allocating 
+    covariancematrix = double.empty;
+    figure();
+    hold on
+    axis equal
+    grid on
+    originalcampose = plot(data.pose.x,data.pose.y,'k');
+    odometricpose   = plot(newpose.x,newpose.y,'r');
+    correctcampose  = plot(x_corr,y_corr);
+    for n = 1:(length(data.cov_11))
+        
+        % assemble covariance
+        covariancematrix(:,:,n) = [[data.cov_11(n), data.cov_12(n), data.cov_13(n)];
+            [data.cov_21(n), data.cov_22(n), data.cov_23(n)];
+            [data.cov_31(n), data.cov_32(n), data.cov_33(n)]];
+        
+        % plot
+        [w1, w2, ell_angle] = Covariance2EllipseParameters(covariancematrix(:,:,n), 0.68);
+        cov_orig  = myEllipse(w1, w2, ell_angle+pi/2, data.pose.x(n), data.pose.y(n), 'b', '-', 100);
+        cov_rical =myEllipse(w1, w2, ell_angle+pi/2, newpose.x(n), newpose.y(n), 'm', '-', 100);  
+    end
+    xlabel('[cm]')
+    ylabel('[cm]')
+    legend([originalcampose odometricpose correctcampose],'original camera pose','odometric pose', 'camera offset pose');
+    legend([cov_orig, cov_rical],'coavariance dataset', 'covariance calculate')
+    hold off
+    
+    % free memory
+    clearvars Cov
 end
