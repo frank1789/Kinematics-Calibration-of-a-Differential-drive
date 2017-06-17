@@ -1,6 +1,6 @@
 \section{Methods}
 \subsection{Kinematic Model}
-For the analysis of differential wheelchair drive parameters using a simplified model in the reference system own odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated respectively with omega, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation functional \ref{eq:velocityrelation}. The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
+For the analysis of differential wheelchair drive parameters is used a simplified modelthe reference system own odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated with $\omega_r$ and $\omega_l$, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation (\ref{eq:velocityrelation}). The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
 \begin{equation}
 \label{eq:velocityrelation}
 	\left[ \begin{array}{cc}
@@ -21,7 +21,7 @@ For the analysis of differential wheelchair drive parameters using a simplified 
 \caption{Robot kinematic model}
 \label{fig:model}
 \end{figure}
-\noindent Where the matrix $\textbf{C} \in \RealNumber^{2 x 2}$ is defined as (\ref{eq:Cmatrix}):
+\noindent The matrix $\textbf{C} \in \RealNumber^{2 x 2}$ is defined as (\ref{eq:Cmatrix}):
 \begin{equation}
 \label{eq:Cmatrix}
 	\left[ \begin{array}{cc}
@@ -49,8 +49,8 @@ Each information is saved in columns:
 \begin{itemize}
 \item column 1: acquisistions time [ms];
 \item columns 2--3--4: camera pose $x, y, \theta$ [cm, cm, rad];
-\item column from 5 to 13: camera covariance ordered by rows [cm$2^2$] for pose, [rad$^2$] for angle and [cm*rad] for mixed terms;
-\item colunm 14--15: odometric Encoder ticks Left and Right;
+\item column from 5 to 13: camera covariance ordered by rows [cm$^2$] for pose, [rad$^2$] for angle and [cm$\,*\,$rad] for mixed terms;
+\item colunm 14--15: odometric encoder [ticks left] and [ticks right];
 \end{itemize}
 It has been chosen to perform the odometry calibration whereas in the same calculation all four datasets provided as suggested by the technique used. Then the equations (\ref{eq:Phi4}) and (\ref{eq:XY4}) are rewritten limited to the four paths to obtain:
 \begin{equation}
@@ -103,7 +103,7 @@ It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes o
 \caption{estimated value}
 \label{tab:recapvalue}
 \end{table}
-\\Finally, we show in figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
+\\Finally, figures \ref{fig:OdoRec}, it shows the calculation for each path odometric with parameters previously estimated in comparison with the trajectory recorded by the camera.
 \begin{figure*}[htb]
 \centering
 \subfloat[][\emph{dataset 1}.]
@@ -125,7 +125,8 @@ It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes o
 \caption{optimization among all dataset}
 \label{fig:boxplot}
 \end{figure*}
-To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable optimization. oppurtanamente choices using six variables. Using the parameters obtained previously, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
+To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable.
+Using the parameters obtained previously, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
 The algorithm used is part of the family of ``\emph{genetic algorithms} \cite{wiki:xxx}'' used for finding optimal solution.
 In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible \cite{Whitley1994}.
 The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.
