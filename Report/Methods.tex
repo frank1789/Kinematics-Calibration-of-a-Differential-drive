@@ -1,6 +1,6 @@
 \section{Methods}
 \subsection{Kinematic Model}
-For the analysis of differential wheelchair drive parameters is used a simplified modelthe reference system own odometric placed in the center of the robot indicated by $RF1$. Consider that moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated with $\omega_r$ and $\omega_l$, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation (\ref{eq:velocityrelation}). The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
+For the analysis of wheelchair differential drive parameters is used a simplified model; the reference system, indicated by $RF1$, is placed in the odometric center of the robot. Consider that the robot moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated with $\omega_r$ and $\omega_l$, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation (\ref{eq:velocityrelation}). The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
 \begin{equation}
 \label{eq:velocityrelation}
 	\left[ \begin{array}{cc}
@@ -155,17 +155,17 @@ This generational process is repeated until a termination condition has been rea
 \item Manual inspection
 \item Combinations of the above
 \end{itemize}
-\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data. By obtaining, thanks to the peculiarities of genetic recombination algorithms, the minimum for the function as the best possible combination.
-The optimization is performed on all the datasets, thus returning four best combinations for the path observable in boxplot, fig. \ref{fig:boxplot}, it is possible to observe the behavior of the four best samples:
+\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data, by obtaining the minimum for the function as the best possible combination, thanks to the peculiarities of genetic recombination algorithms.
+The optimization is performed on all the datasets, thus returning four best combinations for the path observable in boxplot, fig. \ref{fig:boxplot}. It is possible to observe the behavior of the four best samples:
 \begin{itemize}
 \item extreme values, represented black dashed lines;
 \item median values, represented by the red segment;
 \end{itemize}
 In the first box at the top it shows the distribution of values for the radii's wheels left and right evaluated for the four data series.
-In mid box shows the orientation values and camera distance from robot's center and realtive angle orienatation.
-Finally, the same for the last box shows the track value.
-After performing the optimization is unable to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo1}--\ref{fig:OptiOdo2}--\ref{fig:OptiOdo3}--\ref{fig:OptiOdo4}.
-It is observed that the odometry reconstruction, represented in red, deviates from the original, in black, with odometric center in robot's middle axle, on the other side of the optimal position of the calculated camera, in blue, is much closer to the original though it takes account of the displacement from the midpoint previous considered.
+Mid boxes show the orientation values, camera distance from robot's center and realtive angle orienatation.
+Finally, the last box shows the track value.
+After performing the optimization it is impossible to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo1}--\ref{fig:OptiOdo2}--\ref{fig:OptiOdo3}--\ref{fig:OptiOdo4}.
+It is observed that the odometry reconstruction,in red, deviates from the original with odometric center in robot's middle axle, in black; on the other side, the optimal position of the calculated position camera, in blue, is much closer to the original though it takes into account the displacement from the midpoint previously considered.
 \begin{figure}[htb]
    {\includegraphics[width=0.5\textwidth]{recostropt_1}}
    \caption{Optimal odometric and camera position, dataset: 1}
