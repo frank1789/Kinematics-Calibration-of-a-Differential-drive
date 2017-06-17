@@ -24,11 +24,10 @@ For the analysis of differential wheelchair drive parameters is used a simplifie
 \noindent The matrix $\textbf{C} \in \RealNumber^{2 x 2}$ is defined as (\ref{eq:Cmatrix}):
 \begin{equation}
 \label{eq:Cmatrix}
-	\left[ \begin{array}{cc}
- 				\frac{r_\textsc{r}}{2} &	\frac{r_\textsc{l}}{2} \\
-				\frac{r_\textsc{l}}{b} &	-\frac{r_\textsc{l}}{b} 
-			 \end{array} 
-	\right]
+	\begin{bmatrix*}[r]
+		\frac{r_\textsc{r}}{2} &	\frac{r_\textsc{l}}{2} \\
+		\frac{r_\textsc{l}}{b} &	-\frac{r_\textsc{l}}{b} 
+	\end{bmatrix*}
 \end{equation}
 in which $r_\textsc{r}$ and $r_\textsc{l}$ are the radii of the right and left wheel, respectively.
 The odometry of a vehicle is usually implemented by discrete-time integration, such as (\ref{eq:odometry}):
@@ -60,10 +59,10 @@ It has been chosen to perform the odometry calibration whereas in the same calcu
 		\hat{c}_{2,2}
 	\end{bmatrix} =	(\bar{\Phi}_{\theta}^{\textsc{t}} \, \bar{\Phi}_{\theta})^{-1} \, \bar{\Phi}_{\theta}^{\textsc{t}} \, 
 	\begin{bmatrix}
-		\theta_{\textsc{n},1} - \theta_{\textsc{n},0}\\
-		\theta_{\textsc{n},2} - \theta_{\textsc{n},0}\\
-		\theta_{\textsc{n},3} - \theta_{\textsc{n},0}\\
-		\theta_{\textsc{n},4} - \theta_{\textsc{n},0}
+		\theta_{\textsc{n},1} - \theta_{0,1}\\
+		\theta_{\textsc{n},2} - \theta_{0,2}\\
+		\theta_{\textsc{n},3} - \theta_{0,3}\\
+		\theta_{\textsc{n},4} - \theta_{0,4}
 	\end{bmatrix}
 \end{equation}
 \begin{equation}
@@ -73,19 +72,20 @@ It has been chosen to perform the odometry calibration whereas in the same calcu
 		\hat{c}_{1,2}
 	\end{bmatrix} = (\bar{\Phi}_{xy}^{\textsc{t}} \, \bar{\Phi}_{xy})^{-1} \, \bar{\Phi}_{xy}^{\textsc{t}} \, 
 	\begin{bmatrix}
-		xy_{\textsc{n},1} - xy_{\textsc{n},0}\\
-		xy_{\textsc{n},2} - xy_{\textsc{n},0}\\
-		xy_{\textsc{n},3} - xy_{\textsc{n},0}\\
-		xy_{\textsc{n},4} - xy_{\textsc{n},0}
+		x_{\textsc{n},1} - x_{0,1}\\
+		y_{\textsc{n},1} - y_{0,1}\\
+		\vdots \\
+		x_{\textsc{n},4} - x_{0,4}\\
+		y_{\textsc{n},4} - y_{0,4}
 	\end{bmatrix}
 \end{equation}
  As a result of simulations shows the values of the matrix C:
 \begin{equation}
 \label{eq:Cresult}
-	\begin{bmatrix}
+	\begin{bmatrix*}[r]
 		8.1873  &  6.5229\\
-    	0.2823 &  -0.2807
-	\end{bmatrix}
+    		0.2823  & -0.2807
+	\end{bmatrix*}
 \end{equation}
 It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values, $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because formerly esti- mated at $c_{1,j}$ therefore do not contain the error propagation. Subsequently, it calcu- lates the average between the values of the obtained rays and the standard deviation, these are shown in table (\ref{tab:recapvalue}).
 \begin{table}[!h]
