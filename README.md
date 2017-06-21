@@ -1,6 +1,6 @@
 # Kinematics-Calibration-of-a-Differential-drive
 
-For the final exam of the course of Robotic Perception and Action a project has been realized consisting of the kinematic calibration of a robot.
+For the final exam of the course "Robotic Perception and Action" a project has been realized consisting of the kinematic calibration of a robot.
 This is a study on the odometric reconstruction of a moving robot starting from four datasets.
 * * *
 ## Task 1
