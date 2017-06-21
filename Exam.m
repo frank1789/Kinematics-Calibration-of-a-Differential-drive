@@ -102,7 +102,7 @@ parfor i = 1:4
     fprintf('\tThe best function value found was : %g\n', Fval{i});
 end
 %%
-load gaoptimvalue
+%load gaoptimvalue
 for i = 1:4
     
     % Generate plot 
