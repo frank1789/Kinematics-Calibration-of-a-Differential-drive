@@ -6,10 +6,10 @@ This is a study on the odometric reconstruction of a moving robot starting from 
 ## Task 1
 ### Python script
 First task the cleaning of the cleaning of the data sets has been done by the duplicated information. This task was accomplished by executing a Python script that by providing data input files deletes duplicate records and rewrites a new file with the right information.
-[Pandas](http://pandas.pydata.org/index.html) package was.
+[Pandas](http://pandas.pydata.org/index.html) package was used to generate dataframe.
 * * *
 ## Task 2
-### Calibration in Matlab
+### Calibration and optimization in Matlab
 Second task: In Matlab environment was performed the kinematic calibration using classical equations of odometry to determine the geometric parameters of the robot. Finally using the gentenetic algorithms was performed an optimization voted to determine the correct parameters of robot.
 * * *
 ## Report
