@@ -3,16 +3,15 @@
 For the analysis of wheelchair differential drive parameters is used a simplified model; the reference system, indicated by $RF1$, is placed in the odometric center of the robot. Consider that the robot moves in a reference system fixed to the $RF0$ envoiroment. The robot is subject to pure rolling, then we neglect slippage between wheel and ground. The angular velocities, indicated with $\omega_r$ and $\omega_l$, are applied respectively to the right and left wheels in such a way that the components of the fixed body and the speed of the robot are related to the angu- lar velocity of the wheels according to the equation (\ref{eq:velocityrelation}). The other two support wheels are considered passive. This schematization is observable in fig. \ref{fig:model}.
 \begin{equation}
 \label{eq:velocityrelation}
-	\left[ \begin{array}{cc}
-				v	\\									
-				\omega 							
-			 \end{array} 
-	\right]  =\, C\,
-	\left[ \begin{array}{cc}
- 				\omega_\textsc{l} \\ 
-				\omega_\textsc{r}
-			 \end{array} 
-	\right]
+	\begin{bmatrix}
+		v\\									
+		\omega 
+	\end{bmatrix} 
+	=\, C\,
+	\begin{bmatrix}
+		\omega_\textsc{l} \\ 
+		\omega_\textsc{r}
+	\end{bmatrix}
 \end{equation}
 
 \begin{figure}[!h]
@@ -127,6 +126,25 @@ It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes o
 \end{figure*}
 To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable.
 Using the parameters obtained previously, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
+The search space is made up of six variables and their contour conditions are reported in the table \ref{tab:BoundConditionGA} where the initials “LB" and “UB" are the \emph{low boundaries} and \emph{upper boundary} conditions.
+
+\begin{table}[!h]
+\centering
+\begin{adjustbox}{max width=0.45\textwidth}
+\begin{tabular}{ccccccc}
+\hline
+	&$r_\textsc{r}$ 	& $r_\textsc{l}$	&   b 	& $\beta$	& d 		& $\alpha$\\
+	&[mm] 			&    [mm]		& [mm]	&  [rad]		& [mm] 	&  [rad]\\
+\hline
+LB	&	12  			& 	12  			& 	51 	&	$-\pi$ 	& 	5 	&	$-\pi$\\     
+UB 	& 	17.6 		&	17.6 		&	60 	& 	$\pi$ 	&	30	&	$\pi$\\ 
+\hline
+\end{tabular}
+\end{adjustbox}
+\caption{Boundary condition in GA}
+\label{tab:BoundConditionGA}
+\end{table}
+
 The algorithm used is part of the family of ``\emph{genetic algorithms} \cite{wiki:xxx}'' used for finding optimal solution.
 In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible \cite{Whitley1994}.
 The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.
@@ -155,7 +173,13 @@ This generational process is repeated until a termination condition has been rea
 \item Manual inspection
 \item Combinations of the above
 \end{itemize}
-\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data, by obtaining the minimum for the function as the best possible combination, thanks to the peculiarities of genetic recombination algorithms.
+\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data as showed in the first part of listing code \ref{lang:MatlabObjFunc}. 
+As mentioned earlier after reconstructing the odometric path, position and orientation information is subtracted from those in the input files and computed the value using the equation (\ref{eq:RMS}), known as \emph{root mean square} (RMS). 
+\begin{equation}
+x_{rms} = \sqrt{\frac{1}{n}(x_1^2 + \dots + x_n^2)}
+\label{eq:RMS}
+\end{equation}
+In this case the function is already available in the matlab environment in which we pass the previously calculated offset variables as arguments, the sequence of operations is visible at the bottom of the list \ref{lang:MatlabObjFunc}.
 The optimization is performed on all the datasets, thus returning four best combinations for the path observable in boxplot, fig. \ref{fig:boxplot}. It is possible to observe the behavior of the four best samples:
 \begin{itemize}
 \item extreme values, represented black dashed lines;
@@ -166,26 +190,3 @@ Mid boxes show the orientation values, camera distance from robot's center and r
 Finally, the last box shows the track value.
 After performing the optimization it is impossible to determine with greater accuracy the searched data and the results for all four datasets are visible in figures \ref{fig:OptiOdo1}--\ref{fig:OptiOdo2}--\ref{fig:OptiOdo3}--\ref{fig:OptiOdo4}.
 It is observed that the odometry reconstruction,in red, deviates from the original with odometric center in robot's middle axle, in black; on the other side, the optimal position of the calculated position camera, in blue, is much closer to the original though it takes into account the displacement from the midpoint previously considered.
-\begin{figure}[htb]
-   {\includegraphics[width=0.5\textwidth]{recostropt_1}}
-   \caption{Optimal odometric and camera position, dataset: 1}
-   \label{fig:OptiOdo1}
-\end{figure}
-
-\begin{figure}[h]
-   {\includegraphics[width=0.5\textwidth]{recostropt_2}}
-   \caption{Optimal odometric and camera position, dataset: 2}
-   \label{fig:OptiOdo2}
-\end{figure}
-
-\begin{figure}[h]
-   {\includegraphics[width=0.5\textwidth]{recostropt_3}} 
-   \caption{Optimal odometric and camera position, dataset: 3}
-   \label{fig:OptiOdo3}
-\end{figure}
-
-\begin{figure}[h]
-   {\includegraphics[width=0.5\textwidth]{recostropt_4}}
-\caption{Optimal odometric and camera position, dataset: 4}
-\label{fig:OptiOdo4}
-\end{figure}

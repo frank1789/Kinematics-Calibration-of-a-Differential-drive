@@ -173,10 +173,11 @@
     % size of the numbers
     numberstyle={\tiny \color{black}},
     numbersep=9pt, % this defines how far the numbers are from the text
-    emph=[1]{for,end,break},emphstyle=[1]\color{blue}, %some words to emphasise
+    %some words to emphasise
+    emph=[1]{for,end,break},emphstyle=[1]\color{blue}, 
     emph=[2]{cos,sin,length, pi}, emphstyle=[2]\color{black},
     %
-    %rulecolor=\color{ipython_frame},
+    rulecolor=\color{ipython_frame},
     frame=single,
     frameround={t}{t}{t}{t},
     framexleftmargin=6mm,
@@ -188,7 +189,7 @@
     basicstyle=\scriptsize,   
 }
 
-%----Table------------------------------------------------------------------------------
+%---Table------------------------------------------------------------
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{color}
@@ -198,7 +199,7 @@
 \usepackage{makecell}
 \usepackage{booktabs}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------
 % Allows abstract customization
 \usepackage{abstract}
 
@@ -292,6 +293,7 @@ Estimate the camera position with respect to the wheelchair reference point (the
 %	Programming Languages
 %---------------------------------------------------------------------------------------- 
 	\onecolumn
+	\newpage
 	\lstinputlisting[language=iPython,label=lang:codePython,caption=main.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/main.py}
 	\lstinputlisting[language=iPython,label=lang:codePythonPd,caption=dataframe.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/dataframe.py}
 	\newpage	
