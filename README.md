@@ -13,5 +13,5 @@ First task the cleaning of the cleaning of the data sets has been done by the du
 Second task: In Matlab environment was performed the kinematic calibration using classical equations of odometry to determine the geometric parameters of the robot. Finally using the gentenetic algorithms was performed an optimization voted to determine the correct parameters of robot.
 * * *
 ## Report
-The report[^1] is avaible [here](https://github.com/frank1789/Kinematics-Calibration-of-a-Differential-drive/blob/master/Report/Report.pdf) with all details clearly exposed.
-[^1]: If you compile the report, make sure to change the absolute script path into the master file
+The report is avaible [here](https://github.com/frank1789/Kinematics-Calibration-of-a-Differential-drive/blob/master/Report/Report.pdf) with all details clearly exposed.
+###### note: If you compile the report, make sure to change the absolute script path into the master file
