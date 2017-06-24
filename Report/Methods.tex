@@ -145,10 +145,10 @@ UB 	& 	17.6 		&	17.6 		&	60 	& 	$\pi$ 	&	30	&	$\pi$\\
 \label{tab:BoundConditionGA}
 \end{table}
 
-The algorithm used is part of the family of ``\emph{genetic algorithms} \cite{wiki:xxx}'' used for finding optimal solution.
+\noindent The algorithm used is part of the family of ``\emph{genetic algorithms} \cite{wiki:xxx}'' used for finding optimal solution.
 In a genetic algorithm, a population of candidate solutions (called individuals, creatures, or phenotypes) to an optimization problem is evolved toward better solutions. Each candidate solution has a set of properties which can be mutated and altered; traditionally, solutions are represented in binary as strings of $0s$ and $1s$, but other encodings are also possible \cite{Whitley1994}.
-The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.
-A typical genetic algorithm requires:
+The evolution usually starts from a population of randomly generated individuals, and is an iterative process, with the population in each iteration called a generation. In each generation, the fitness of every individual in the population is evaluated; the fitness is usually the value of the objective function in the optimization problem being solved. The more fit individuals are stochastically selected from the current population, and each individual's genome is modified (recombined and possibly randomly mutated) to form a new generation. The new generation of candidate solutions is then used in the next iteration of the algorithm. Commonly, the algorithm terminates when either a maximum number of generations has been produced, or a satisfactory fitness level has been reached for the population.\linebreak
+\\\\A typical genetic algorithm requires:
 \begin{itemize}
 \item a genetic representation of the solution domain,
 \item a fitness function to evaluate the solution domain.
