@@ -5,7 +5,7 @@ Errors also depend on assumptions regarding the non-deformability of the wheels,
 The motion is achieved by considering a regular and uniform surface, ignoring bumps, obstacles, unevenness, etc. 
 In this scientific article, as in other scientific works \cite{censi13joint}--\cite{Jung2016}--\cite{DBLP:journals/ijrr/ChongK99}, is recommanded to use predetermined paths, possibly in a straight line, with counterclockwise and clockwise rotations in order to minimize errors and to allow independent calibration of the parameters.
 On the other hand, for the results obtained from optimization we must take into account that there are limitations of the use of a genetic algorithm compared to alternative optimization algorithms.
-From the optimization operation we get the solution for each path visible in the table \ref{tab:GAresult}, you can see that the values are slightly different for each dataset
+From the optimization operation we get the solution for each path visible in the table \ref{tab:GAresult}, you can see that the values are slightly different for each dataset.
 \begin{table}[!h]
 \centering
 \begin{adjustbox}{max width=0.45\textwidth}
@@ -19,7 +19,7 @@ From the optimization operation we get the solution for each path visible in the
     display columns/1/.style={column name =$r_\textsc{l}$, column type=r,fixed,fixed zerofill,precision=3,set thousands separator={\,}},
     %other style option 
     display columns/2/.style={column name =b, column type=r, fixed,fixed zerofill,precision=3,set thousands separator={\,}},
-    display columns/3/.style={column name =$\beta$, column type=r, fixed,fixed zerofill,precision=3,set thousands separator={\,}},
+    display columns/3/.style={column name =$\xi$, column type=r, fixed,fixed zerofill,precision=3,set thousands separator={\,}},
     display columns/4/.style={column name =d, column type=r, fixed,fixed zerofill,precision=3,set thousands separator={\,}},
     display columns/5/.style={column name =$\alpha$, column type=r, fixed,fixed zerofill,precision=3,set thousands separator={\,}},  
     }
@@ -55,4 +55,3 @@ In evolution strategies and evolutionary programming, diversity is not essential
 \caption{Optimal odometric and camera position, dataset: 4}
 \label{fig:OptiOdo4}
 \end{figure}
-\\Finally, it is possible to observe a map that shows points with a higher confidence index than those with greater uncertainty, this representation can be used to improve the positioning of reference systems used by the camera through the Aruco system.
