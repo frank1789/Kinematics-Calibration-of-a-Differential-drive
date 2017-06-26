@@ -86,17 +86,17 @@ It has been chosen to perform the odometry calibration whereas in the same calcu
     		0.2823  & -0.2807
 	\end{bmatrix*}
 \end{equation}
-It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values, $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because formerly esti- mated at $c_{1,j}$ therefore do not contain the error propagation. Subsequently, it calcu- lates the average between the values of the obtained rays and the standard deviation, these are shown in table (\ref{tab:recapvalue}).
+It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes of the wheels are different from each other, this is due to the simplifications introduced by the kinematic model. On the other hands, the axle values, $c_ {2,1}$ and $c_ {2,2}$, without the negative sign, are much more similar because formerly estimated at $c_{1,j}$ therefore do not contain the error propagation. Subsequently, it calculates the average between the values of the obtained rays and the standard deviation, these are shown in table (\ref{tab:recapvalue}).
 \begin{table}[!h]
 \centering
 	\begin{tabular}{lccc}
 		\hline
-								& Radius 	& Mean 	& standard\\
-								&	[mm]	& [mm]	& deviation [mm]\\
+						& 	Radius 		& Mean 		&	standard\\
+						&	[cm]			& [cm]		&	deviation [cm]\\
 		\hline
-		$r_\textsc{r}$	&	$130.457$		& $147.102	$		&	$\pm23.538$\\
-		$r_\textsc{l}$	&	$163.746$		& $147.102	$		&	$\pm23.538$\\
-		$b$					&	$522.43$\\
+		$r_\textsc{r}$	&	$13.046$		& $14.710$	&	$\pm2.353$\\
+		$r_\textsc{l}$	&	$16.375$		& $14.710$	&	$\pm2.353$\\
+		$b$				&	$52.243$\\
 		\hline
 \end{tabular}
 \caption{estimated value}
@@ -133,8 +133,8 @@ The search space is made up of six variables and their contour conditions are re
 \begin{adjustbox}{max width=0.45\textwidth}
 \begin{tabular}{ccccccc}
 \hline
-	&$r_\textsc{r}$ 	& $r_\textsc{l}$	&   b 	& $\xi$	& d 		& $\alpha$\\
-	&[mm] 			&    [mm]		& [mm]	&  [rad]		& [mm] 	&  [rad]\\
+	&$r_\textsc{r}$ 	& $r_\textsc{l}$	&   b 	& $\xi$		&  d 	& $\alpha$\\
+	&   [cm] 		&    [cm]		& [cm]	&  [rad]		& [cm] 	&  [rad]\\
 \hline
 LB	&	12  			& 	12  			& 	51 	&	$-\pi$ 	& 	5 	&	$-\pi$\\     
 UB 	& 	17.6 		&	17.6 		&	60 	& 	$\pi$ 	&	30	&	$\pi$\\ 
@@ -173,7 +173,7 @@ This generational process is repeated until a termination condition has been rea
 \item Manual inspection
 \item Combinations of the above
 \end{itemize}
-\noindent It is made of a fitness function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data as showed in the first part of listing code \ref{lang:MatlabObjFunc}. 
+\noindent It is made of a objective function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data as showed in the first part of listing code \ref{lang:MatlabObjFunc}. 
 As mentioned earlier after reconstructing the odometric path, position and orientation information is subtracted from those in the input files and computed the value using the equation (\ref{eq:RMS}), known as \emph{root mean square} (RMS). 
 \begin{equation}
 x_{rms} = \sqrt{\frac{1}{n}(x_1^2 + \dots + x_n^2)}
