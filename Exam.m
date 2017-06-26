@@ -83,7 +83,7 @@ pause(2)
 % 4th parameter [-pi <-> pi]   =  beta
 % 5th parameter [5 <-> 30]     =  distance from center
 % 6th parameter [-pi <-> pi]  =  alpha
-LB = [12   12   51 -pi  5 -pi];    % lower bound
+LB = [12   12   51 -pi  5 -pi];     % lower bound
 UB = [17.6 17.6 60  pi 30 pi];      % upper bound
 
 % number of variable
@@ -101,13 +101,13 @@ parfor i = 1:4
     fprintf('\tThe number of function evaluations was : %d\n', Output{i}.funccount);
     fprintf('\tThe best function value found was : %g\n', Fval{i});
 end
-%%
-load gaoptimvalue
+
 for i = 1:4
-    
+
     % Generate plot 
-    graphOdometricCam( data{i}, parameters{i},i); 
+    graphOdometricCam( data{i}, parameters{i},i);
+    printGAresult( parameters{i} );
 end
 
 % Generate box-plot for optimized parameters 
-graphOptimization( parameters )
+graphOptimization( parameters );

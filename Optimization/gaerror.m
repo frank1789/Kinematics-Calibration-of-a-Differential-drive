@@ -19,6 +19,7 @@ for i=1:length(data.pose.psi)
     newpose.y(i+1)   = newpose.y(i)   +   pi * (diffright(i) * inputparams(2) + diffleft(i) * inputparams(1)) * (sin(newpose.psi(i))/res_encoder);
     newpose.psi(i+1) = newpose.psi(i) + 2*pi * (diffright(i) * inputparams(2) - diffleft(i) * inputparams(1)) / (res_encoder * inputparams(3));
 end
+
 % clear duplicate rows
 newpose.x(1)   = [];
 newpose.y(1)   = [];
@@ -27,7 +28,6 @@ newpose.psi(1) = [];
 % calc offset
 x_offset = data.pose.x - inputparams(5) * cos(inputparams(6) + data.pose.psi - inputparams(4));
 y_offset = data.pose.y - inputparams(5) * sin(inputparams(6) + data.pose.psi - inputparams(4));
-% Robot's absolute orientation angle -> xhi = theta - inputparams(4)
 xhi = data.pose.psi - inputparams(4);
 
 % Objective function, adjust newpose to perform difference
