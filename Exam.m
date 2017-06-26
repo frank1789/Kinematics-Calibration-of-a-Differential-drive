@@ -106,9 +106,8 @@ for i = 1:4
 
     % Generate plot 
     graphOdometricCam( data{i}, parameters{i},i);
-    printGAresult( parameters{i} )
     printGAresult( parameters{i} );
 end
 
 % Generate box-plot for optimized parameters 
-graphOptimization( parameters )graphOptimization( parameters );
+graphOptimization( parameters );
