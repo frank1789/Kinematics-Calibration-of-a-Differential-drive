@@ -50,7 +50,6 @@
 \usepackage{algpseudocode}
 \usepackage{listings}
 \usepackage{xcolor}
-\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
 \definecolor{halfgray}{gray}{0.55}
 \definecolor{ipython_frame}{RGB}{207, 207, 207}
 \definecolor{ipython_bg}{RGB}{247, 247, 247}
@@ -107,6 +106,30 @@
     % {replace}{replacement}{lenght of replace}
     % *{-}{-}{1} will not replace in comments and so on
     literate=
+    *{+}{{{\color{ipython_purple}+}}}1
+    {-}{{{\color{ipython_purple}-}}}1
+    {*}{{{\color{ipython_purple}$^\ast$}}}1
+    {/}{{{\color{ipython_purple}/}}}1
+    {^}{{{\color{ipython_purple}\^{}}}}1
+    {?}{{{\color{ipython_purple}?}}}1
+    {!}{{{\color{ipython_purple}!}}}1
+    {\%}{{{\color{ipython_purple}\%}}}1
+    {<}{{{\color{ipython_purple}<}}}1
+    {>}{{{\color{ipython_purple}>}}}1
+    {|}{{{\color{ipython_purple}|}}}1
+    {\&}{{{\color{ipython_purple}\&}}}1
+    {~}{{{\color{ipython_purple}~}}}1
+    %
+    {==}{{{\color{ipython_purple}==}}}2
+    {<=}{{{\color{ipython_purple}<=}}}2
+    {>=}{{{\color{ipython_purple}>=}}}2
+    %
+    {+=}{{{+=}}}2
+    {-=}{{{-=}}}2
+    {*=}{{{$^\ast$=}}}2
+    {/=}{{{/=}}}2,
+    %
+    literate=
     {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
     {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
     {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
@@ -117,24 +140,9 @@
     {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
     {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
     {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
-    {€}{{\EUR}}1 {£}{{\pounds}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1,
     %
-    {^}{{{\color{ipython_purple}\^{}}}}1
-    {=}{{{\color{ipython_purple}=}}}1
-    %
-    {+}{{{\color{ipython_purple}+}}}1
-    {*}{{{\color{ipython_purple}$^\ast$}}}1
-    {/}{{{\color{ipython_purple}/}}}1
-    %
-    {+=}{{{+=}}}1
-    {-=}{{{-=}}}1
-    {*=}{{{$^\ast$=}}}1
-    {/=}{{{/=}}}1,
-    literate=
-    *{-}{{{\color{ipython_purple}-}}}1
-     {?}{{{\color{ipython_purple}?}}}1,
-    %
-    identifierstyle=\color{black}\ttfamily,
+%   identifierstyle=\color{red}\ttfamily,
     commentstyle=\color{ipython_cyan}\ttfamily,
     stringstyle=\color{ipython_red}\ttfamily,
     keepspaces=true,
@@ -151,7 +159,7 @@
     %
     backgroundcolor=\color{ipython_bg},
     %   extendedchars=true,
-    basicstyle=\scriptsize,
+    basicstyle=\scriptsize\ttfamily,
     keywordstyle=\color{ipython_green}\ttfamily,
 }
 
@@ -280,5 +288,7 @@ Estimate the camera position with respect to the wheelchair reference point (the
 	\lstinputlisting[language=iPython,label=lang:codePython,caption=main.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/main.py}
 	\lstinputlisting[language=iPython,label=lang:codePythonPd,caption=dataframe.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/dataframe.py}
 	\newpage	
+	\lstinputlisting[label=lang:MatlabMain,caption=Exam.m]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Exam.m}
+	\newpage
 	\lstinputlisting[label=lang:MatlabObjFunc,caption=gaerror.m]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Optimization/gaerror.m}
 \end{document}
