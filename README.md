@@ -14,3 +14,4 @@ Second task: In Matlab environment was performed the kinematic calibration using
 * * *
 ## Report
 The report is avaible [here](https://github.com/frank1789/Kinematics-Calibration-of-a-Differential-drive/blob/master/Report/Report.pdf) with all details clearly exposed.
+###### note: If you compile the report, make sure to change the absolute script path into the master file

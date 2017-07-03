@@ -4,6 +4,7 @@ function graph_pose( x, y, i )
 figure();
 plot(x, y);
 grid on;
+axis equal
 str = sprintf('Trajectory dataset');
 title(str)
 str = sprintf('Camera Pose');

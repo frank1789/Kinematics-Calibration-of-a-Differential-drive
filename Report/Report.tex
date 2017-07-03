@@ -1,7 +1,7 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-\documentclass[12pt,a4paper,english,twoside,twocolumn]{article}
+\documentclass[11pt,a4paper,english,twoside,twocolumn]{article}
 \pagenumbering{arabic}
 \usepackage{setspace}
 %\onehalfspace
@@ -10,9 +10,9 @@
 \usepackage{multirow}
 \usepackage{multicol}
 \usepackage[section]{placeins}
-%----------------------------------------------------------------------------------------
-\usepackage{microtype} % Slightly tweak font spacing for aesthetics
-\usepackage[english]{babel} % Language hyphenation and typographical rules
+%--Text and Style------------------------------------------------------------------------
+\usepackage{microtype} 			% Slightly tweak font spacing for aesthetics
+\usepackage[english]{babel} 		% Language hyphenation and typographical rules
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{ae}
@@ -36,30 +36,188 @@
 \DeclareMathOperator{\RealNumber}{\rm I\!R}
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 \DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
-%----------------------------------------------------------------------------------------
+
+%---Figure------------------------------------------------------------------------------
+
 \usepackage{graphicx}
 \graphicspath{{./imgs/}}
 \renewcommand{\figurename}{Fig.}
 \usepackage{subfig}
-%----------------------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------------------
 \usepackage{algorithmicx}
 \usepackage[ruled]{algorithm}
 \usepackage{algpseudocode}
-%----------------------------------------------------------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{halfgray}{gray}{0.55}
+\definecolor{ipython_frame}{RGB}{207, 207, 207}
+\definecolor{ipython_bg}{RGB}{247, 247, 247}
+\definecolor{ipython_red}{RGB}{186, 33, 33}
+\definecolor{ipython_green}{RGB}{0, 128, 0}
+\definecolor{ipython_cyan}{RGB}{64, 128, 128}
+\definecolor{ipython_purple}{RGB}{170, 34, 255}
+\lstset{
+    breaklines=true,
+    %
+    extendedchars=true,
+    literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+%%
+%% Python definition (c) 1998 Michael Weber
+%% Additional definitions (2013) Alexis Dimitriadis
+%% modified by me (should not have empty lines)
+%%
+\lstdefinelanguage{iPython}{
+    morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},%
+    %
+    % Built-ins
+    morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern},%
+    %
+    sensitive=true,%
+    morecomment=[l]\#,%
+    morestring=[b]',%
+    morestring=[b]",%
+    %
+    morestring=[s]{'''}{'''},% used for documentation text (mulitiline strings)
+    morestring=[s]{"""}{"""},% added by Philipp Matthias Hahn
+    %
+    morestring=[s]{r'}{'},% `raw' strings
+    morestring=[s]{r"}{"},%
+    morestring=[s]{r'''}{'''},%
+    morestring=[s]{r"""}{"""},%
+    morestring=[s]{u'}{'},% unicode strings
+    morestring=[s]{u"}{"},%
+    morestring=[s]{u'''}{'''},%
+    morestring=[s]{u"""}{"""},%
+    %
+    % {replace}{replacement}{lenght of replace}
+    % *{-}{-}{1} will not replace in comments and so on
+    literate=
+    *{+}{{{\color{ipython_purple}+}}}1
+    {-}{{{\color{ipython_purple}-}}}1
+    {*}{{{\color{ipython_purple}$^\ast$}}}1
+    {/}{{{\color{ipython_purple}/}}}1
+    {^}{{{\color{ipython_purple}\^{}}}}1
+    {?}{{{\color{ipython_purple}?}}}1
+    {!}{{{\color{ipython_purple}!}}}1
+    {\%}{{{\color{ipython_purple}\%}}}1
+    {<}{{{\color{ipython_purple}<}}}1
+    {>}{{{\color{ipython_purple}>}}}1
+    {|}{{{\color{ipython_purple}|}}}1
+    {\&}{{{\color{ipython_purple}\&}}}1
+    {~}{{{\color{ipython_purple}~}}}1
+    %
+    {==}{{{\color{ipython_purple}==}}}2
+    {<=}{{{\color{ipython_purple}<=}}}2
+    {>=}{{{\color{ipython_purple}>=}}}2
+    %
+    {+=}{{{+=}}}2
+    {-=}{{{-=}}}2
+    {*=}{{{$^\ast$=}}}2
+    {/=}{{{/=}}}2,
+    %
+    literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+    {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+    {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+    {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+    {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+    {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+    {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+    {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+    {€}{{\EUR}}1 {£}{{\pounds}}1,
+    %
+%   identifierstyle=\color{red}\ttfamily,
+    commentstyle=\color{ipython_cyan}\ttfamily,
+    stringstyle=\color{ipython_red}\ttfamily,
+    keepspaces=true,
+    showspaces=false,
+    showstringspaces=false,
+    %
+    rulecolor=\color{ipython_frame},
+    frame=single,
+    frameround={t}{t}{t}{t},
+    framexleftmargin=6mm,
+    numbers=left,
+    numberstyle=\tiny\color{halfgray},
+    %
+    %
+    backgroundcolor=\color{ipython_bg},
+    %   extendedchars=true,
+    basicstyle=\scriptsize\ttfamily,
+    keywordstyle=\color{ipython_green}\ttfamily,
+}
+
+%------Matlab scheme color-code----------------------------------
+\usepackage{matlab-prettifier}
+\lstset{
+	style = Matlab-editor,
+	basicstyle=\mlttfamily,
+    %Style frame and number
+    rulecolor = \color{ipython_frame},
+    frame	=single,
+    frameround={t}{t}{t}{t},
+    framexleftmargin=6mm,
+    numbers=left,
+    numberstyle=\tiny\color{halfgray},
+	%background color frame
+    backgroundcolor=\color{ipython_bg}   
+}
+
+%---Table------------------------------------------------------------
 \usepackage{tabularx}
-%----------------------------------------------------------------------------------------
-\usepackage{abstract} % Allows abstract customization
-\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
-\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
-\usepackage{titlesec} % Allows customization of titles
-\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
-\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
-\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
-\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+\usepackage{array}
+\usepackage{color}
+\usepackage{adjustbox}
+\usepackage{colortbl}
+\usepackage{pgfplotstable}
+\usepackage{makecell}
+\usepackage{booktabs}
+
+%--------------------------------------------------------------------
+% Allows abstract customization
+\usepackage{abstract}
+
+% Set the "Abstract" text to bold
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} 
+% Set the abstract itself to small italic text
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} 
+
+% Allows customization of titles
+\usepackage{titlesec} 
+
+% Roman numerals for the sections
+\renewcommand\thesection{\Roman{section}} 
+
+% roman numerals for subsections
+\renewcommand\thesubsection{\roman{subsection}} 
+
+% Change the look of the section titles
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} 
+
+% Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} 
 \usepackage{titling} % Customizing the title section
+
 %----------------------------------------------------------------------------------------
 \usepackage{tikz,fp,ifthen,fullpage}
 \usepackage{pgfmath, pgfplots, xparse}
+\usepgfplotslibrary{fillbetween}
 \usetikzlibrary{backgrounds, arrows}
 \usetikzlibrary{decorations.pathmorphing,fit,through}
 \usetikzlibrary{shapes,decorations,shadows}
@@ -71,42 +229,66 @@
 %	TITLE SECTION
 %----------------------------------------------------------------------------------------
 \setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+
 \pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+
+
 \posttitle{\end{center}} % Article title closing formatting
+
+
 \title{Homework - Kinematics Calibration of a Differential drive wheelchair} % Article title
+
 \author{%
-\textsc{Francesco Argentieri}\thanks{ID: 183892}\\[1ex] % Your name
-\normalsize University of Trento \\ % Your institution
-\normalsize \href{mailto:francesco.argentieri@studenti.unitn.it}{francesco.argentieri@studenti.unitn.it} % Your email address
+	% Your name
+	\textsc{Francesco Argentieri}\thanks{ID: 183892}\\[1ex] 
+	% Your institution
+	\normalsize University of Trento \\ 
+	% Your email address
+	\normalsize \href{mailto:francesco.argentieri@studenti.unitn.it}{francesco.argentieri@studenti.unitn.it} 
 }
 %\and % Uncomment if 2 authors are required, duplicate these 4 lines if more
 %\textsc{Jane Smith}\thanks{Corresponding author} \\[1ex] % Second author's name
 %\normalsize University of Utah \\ % Second author's institution
 %\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
-\date{} % Leave empty to omit a date
+
+% Leave empty to omit a date
+\date{} 
 \renewcommand{\maketitlehookd}{%
-\begin{abstract}
-\noindent  For a mobile robot, odometry calibration consists of the identification of a set of kinematic parameters that allow reconstructing the vehicle’s absolute position and orientation starting from the wheels’ encoder measurements.
+	\begin{abstract}
+		\noindent  For a mobile robot, odometry calibration consists of the identification of a set of kinematic parameters that allow reconstructing the vehicle’s relative position and orientation starting from the wheels’ encoder measurements.
+The aim of the homework is to:
+estimate from the encoder and the camera data the kinematics parameters wheels radius “$r_\textsc{l}$" and “$r_\textsc{r}$" and wheelbase “b".
+Estimate the camera position with respect to the wheelchair reference point (the mid point between the wheels).
 \end{abstract}
 }
 
 %----------------------------------------------------------------------------------------
 \begin{document}
-
 	% Print the title
 	\maketitle
-	%----------------------------------------------------------------------------------------
-	%	ARTICLE CONTENTS
-	%----------------------------------------------------------------------------------------
+	
+	%Other chapter
 	\input{Introduction}
-	%\input{dataanalysis}
 	\input{Methods}
 	\input{Result}
 
 %----------------------------------------------------------------------------------------
 %	Bibliography
 %----------------------------------------------------------------------------------------
-	\nocite{*}
+	
 	\bibliographystyle{IEEEtran}
 	\bibliography{bibliografy.bib}
+
+%----------------------------------------------------------------------------------------
+%	Programming Languages
+%---------------------------------------------------------------------------------------- 
+	\onecolumn
+	\newpage
+	\lstinputlisting[language=iPython,label=lang:codePython,caption=main.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/main.py}
+	\lstinputlisting[language=iPython,label=lang:codePythonPd,caption=dataframe.py]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Data/PythonScript/dataframe.py}
+	\newpage	
+	\lstinputlisting[label=lang:MatlabMain,caption=Exam.m]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Exam.m}
+	\newpage
+	\lstinputlisting[label=lang:MatlabObjFunc,caption=gaerror.m]{/Users/francescoargentieri/Kinematics-Calibration-of-a-Differential-drive/Optimization/gaerror.m}
 \end{document}
