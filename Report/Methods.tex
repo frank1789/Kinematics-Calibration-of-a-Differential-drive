@@ -125,7 +125,7 @@ It is noted that the parameters $c_{1,1}$ and $c_{1,2}$ relative to the spokes o
 \label{fig:boxplot}
 \end{figure*}
 To achieve the goal of determining the offset of the camera mounted on the robot, it is resorted to multivariable.
-Using the parameters obtained previously, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
+Using the parameters previously obtained, summarized in the table \ref{tab:recapvalue}, they were used as the boundary conditions limits.
 The search space is made up of six variables and their contour conditions are reported in the table \ref{tab:BoundConditionGA} where the initials “LB" and “UB" are the \emph{low boundaries} and \emph{upper boundary} conditions.
 
 \begin{table}[!h]
@@ -173,8 +173,8 @@ This generational process is repeated until a termination condition has been rea
 \item Manual inspection
 \item Combinations of the above
 \end{itemize}
-\noindent It is made of a objective function that evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data as showed in the first part of listing code \ref{lang:MatlabObjFunc}. 
-As mentioned earlier after reconstructing the odometric path, position and orientation information is subtracted from those in the input files and computed the value using the equation (\ref{eq:RMS}), known as \emph{root mean square} (RMS). 
+\noindent The objective function is made: it evaluates the difference of position and orientation between the path registered by the robot's camera with the odometry reconstruction carried out starting from the data as showed in the first part of listing code \ref{lang:MatlabObjFunc}. 
+As mentioned, after reconstructing the odometric path, position and orientation, information is subtracted from those in the input files and computed the value using the equation (\ref{eq:RMS}), known as \emph{root mean square} (RMS). 
 \begin{equation}
 x_{rms} = \sqrt{\frac{1}{n}(x_1^2 + \dots + x_n^2)}
 \label{eq:RMS}
