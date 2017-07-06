@@ -1,3 +1,4 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 # Kinematics-Calibration-of-a-Differential-drive
 
 For the final exam of the course "Robotic Perception and Action" a project has been realized consisting of the kinematic calibration of a robot.
